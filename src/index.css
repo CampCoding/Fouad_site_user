@@ -1,0 +1,373 @@
+@import url("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Rakkas&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&display=swap");
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --main-bg-color: #d49a3e80;
+  --font-cairo: Cairo, sans-serif;
+  --font-sans: Open Sans, sans-serif;
+  --light-gray: #eee;
+  --main-color: #d49a3e;
+  --bg-black: #000;
+  --bg-light-black: #171717;
+  --dark-gray: #232323;
+  --green-color: #6a9f1b;
+  --main-height: 38px;
+  --small-size: 11px;
+  --medium-size: 13px;
+  --large-size: 15px;
+  --dark-gray-2: #292929;
+  --dark_gray-3: #2f3031;
+  --dark_gray-4: #090909;
+  --main-gray: #a6a6a6;
+  --fixed-gap: 9.5px;
+  --btn-width: 114px;
+  --medium-gap: 4.5px;
+  --large-gap: 19px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  direction: rtl;
+  background: var(--dark_gray-4);
+  color: var(--foreground);
+  font-family: "Noto Sans Arabic", sans-serif !important;
+}
+
+.customeHeaderClass {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(212, 154, 62, 50%);
+  height: 38px;
+  color: #fdfdfd;
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.customCellClass {
+  overflow: "hidden";
+  padding: "2px 4px";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #171717;
+  height: 38px;
+  color: #fdfdfd;
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.home-card {
+  background: linear-gradient(
+    90deg,
+    rgba(36, 36, 36, 0.63),
+    rgba(64, 64, 64, 0.63)
+  );
+  cursor: pointer;
+}
+.home-card.active {
+  border: 2px solid var(--main-color);
+}
+
+.layout-card {
+  transform: translateY(-20px);
+}
+@media (max-width: 982px) {
+  .layout-card {
+    transform: translateY(-89px);
+  }
+}
+@media (max-width: 888px) {
+  .layout-card {
+    transform: translateY(-89px);
+  }
+}
+@media (max-width: 620px) {
+  .layout-card {
+    width: 90px !important;
+    height: 90px !important;
+  }
+  .layout-card img {
+    width: 26px !important;
+    height: 26px !important;
+  }
+  .layout-card p {
+    font-size: 13px !important;
+  }
+}
+@media (max-width: 580px) {
+  .layout-card {
+    transform: translateY(0px);
+    gap: 6px !important;
+  }
+  .layout-card img {
+    width: 34px !important;
+    height: 34px !important;
+  }
+}
+
+.layout-content {
+  transform: translateY(-30px);
+
+  @media (max-width: 580px) {
+    transform: translateY(0px);
+  }
+}
+
+.dropdown_box {
+  background: linear-gradient(
+    90deg,
+    rgba(36, 36, 36, 0.63),
+    rgba(64, 64, 64, 0.63)
+  );
+  color: white;
+}
+
+.profile_cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+@media (max-width: 529px) {
+  .profile_cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.input-group {
+  background-color: var(--bg-light-black);
+  height: 38px;
+  border: 1px solid var(--main-color);
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-cairo);
+  padding: 0px 15px;
+}
+.input-group input {
+  outline: none;
+  height: 35px;
+  width: 85%;
+  color: white;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  background-color: transparent;
+  border: none;
+  outline: none !important;
+}
+.input-group input::-moz-placeholder {
+  color: white !important;
+}
+.input-group input::placeholder {
+  color: white !important;
+}
+.input-group input:focus {
+  border: none !important;
+  border-radius: 4px !important;
+  outline: none !important;
+}
+.input-group img {
+  width: 30px;
+  height: 30px;
+  margin: auto 0px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.auth_btn {
+  height: var(--main-height);
+  width: var(--btn-width);
+  border: 1px solid var(--main-color);
+  background-color: var(--bg-light-black);
+  color: white;
+  border-radius: 4px !important;
+  padding: 2px;
+  font-size: 13px !important;
+  font-weight: bold !important;
+}
+@media (max-width: 400px) {
+  .auth_btn {
+    font-size: 12px !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #545454;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border-radius: 10px;
+}
+
+/* داخل globals.css أو في ملف مخصص */
+.custom-range-picker .ant-picker-input > input {
+  color: #d49a3e !important;
+}
+
+.custom-range-picker .ant-picker-separator {
+  color: #d49a3e !important;
+}
+
+.custom-range-picker .ant-picker {
+  background-color: #171717 !important;
+  border-color: #545454 !important;
+}
+
+.custom-range-picker .ant-picker-input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.custom-range-picker .ant-picker-suffix {
+  display: none; /* نخفي الأيقونة الافتراضية */
+}
+
+.custom-range-picker .ant-picker-input:first-child::before,
+.custom-range-picker .ant-picker-input:last-child::before {
+  content: url("https://res.cloudinary.com/dbz6ebekj/image/upload/v1752063867/lucide--calendar_d49a3e.png");
+  margin-inline-end: 8px;
+}
+
+.ant-picker input::placeholder {
+  color: #d49a3e !important;
+}
+
+.css-n8uxoy-control input {
+  min-width: 100px !important;
+}
+
+/* ===== تخصيص ألوان PDF Viewer لتتوافق مع الـ Dark Theme ===== */
+
+/* الخلفية الرئيسية */
+.rpv-core__viewer {
+  background-color: #1a1a1a !important;
+}
+
+/* شريط الأدوات */
+.rpv-default-layout__toolbar {
+  background-color: #2a2a2a !important;
+  border-bottom: 1px solid #454545 !important;
+}
+
+/* الأزرار */
+.rpv-core__minimal-button {
+  color: #ffffff !important;
+}
+
+.rpv-core__minimal-button:hover {
+  background-color: #3a3a3a !important;
+}
+
+/* الـ Sidebar */
+.rpv-default-layout__sidebar {
+  background-color: #1a1a1a !important;
+  border-right: 1px solid #454545 !important;
+}
+
+/* الـ Tabs */
+.rpv-default-layout__sidebar-tab {
+  color: #a3a3a3 !important;
+}
+
+.rpv-default-layout__sidebar-tab--selected {
+  color: #d49a3e !important;
+  background-color: #2a2a2a !important;
+}
+
+/* منطقة عرض الصفحات */
+.rpv-core__inner-pages {
+  background-color: #525659 !important;
+}
+
+/* صفحة PDF */
+.rpv-core__page-layer {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* شريط البحث */
+.rpv-search__popover {
+  background-color: #2a2a2a !important;
+  border: 1px solid #454545 !important;
+}
+
+.rpv-search__popover-input {
+  background-color: #171717 !important;
+  color: #ffffff !important;
+  border: 1px solid #454545 !important;
+}
+
+.rpv-search__popover-input:focus {
+  border-color: #d49a3e !important;
+}
+
+/* Scrollbar مخصص */
+.rpv-core__inner-pages::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.rpv-core__inner-pages::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.rpv-core__inner-pages::-webkit-scrollbar-thumb {
+  background: #454545;
+  border-radius: 4px;
+}
+
+.rpv-core__inner-pages::-webkit-scrollbar-thumb:hover {
+  background: #d49a3e;
+}
+
+/* إخفاء بعض العناصر غير المرغوبة */
+.rpv-default-layout__sidebar-headers {
+  background-color: #2a2a2a !important;
+}
+
+/* تحسين مظهر الـ Thumbnails */
+.rpv-thumbnail__container {
+  background-color: #2a2a2a !important;
+}
+
+.rpv-thumbnail__item--selected {
+  border-color: #d49a3e !important;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+
+.card {
+  @apply mx-auto cursor-pointer w-[100px] h-[100px] bg-[linear-gradient(90deg,rgba(36,36,36,0.63),rgba(64,64,64,0.63))] rounded-lg flex flex-col gap-[10px] items-center justify-center;
+}
