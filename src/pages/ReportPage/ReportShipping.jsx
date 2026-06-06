@@ -68,7 +68,7 @@ export default function ReportShipping() {
   return (
     <div className='pb-10 animate-in fade-in duration-300'>
       {/* Page Title Card */}
-      <div className={`card`}>
+      <div className={`card mt-10`}>
         <img src={"https://res.cloudinary.com/dbz6ebekj/image/upload/v1741685481/21_pq4p6t.png"} className='object-contain' width={40} height={40} alt="report icon" />
         <p className="font-bold text-[17px] cursor-pointer text-[#eee]">
           التقارير

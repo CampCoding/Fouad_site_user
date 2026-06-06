@@ -127,7 +127,7 @@ export default function Services() {
     <div className='pb-20 mx-auto'>
       {/* Page Title Card */}
       <div
-        className={`card mb-4 cursor-pointer`}
+        className={`card mb-4 mt-10 cursor-pointer`}
         onClick={() => setView('categories')}
       >
         <HeartHandshake size={40} className="text-(--main-color)" />

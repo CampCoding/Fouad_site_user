@@ -22,7 +22,7 @@ export default function ReservationPayment({ setCurrentStep }) {
   const paymentOptions = [
     { value: 'balance', label: 'الدفع من خلال رصيدك في البرنامج', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889968/134_jj9les.png" },
     { value: 'cash', label: 'الدفع نقدا من خلال الفرع يوم الفحص', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889965/3_jc68er.png" },
-    { value: 'cards', label: 'الدفع من بطاقات الالكترونية', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889967/133_kg8ipo.png" },
+    { value: 'cards', label: 'الدفع من بطاقة الالكترونية', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889967/133_kg8ipo.png" },
     { value: 'instapay', label: 'الدفع من إنستاباي', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889967/131_hdrunk.png" },
     { value: 'vodafone', label: 'الدفع من فودافون كاش', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889967/132_gavuhf.png" },
     { value: 'insurance', label: 'على نفقة التأمين الصحي', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889965/4_i15hno.png" },
@@ -46,7 +46,7 @@ export default function ReservationPayment({ setCurrentStep }) {
     <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Step Header */}
       <div className="border h-[40px] mb-4 flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px]">
-        <p className='text-white text-center font-bold'>إملأ بيانات الحساب </p>
+        <p className='text-white text-center font-bold'>إملأ بيانات الدفع </p>
       </div>
 
       <div className='flex flex-col gap-4'>

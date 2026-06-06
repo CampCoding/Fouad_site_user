@@ -14,14 +14,14 @@ const contactMethods = [
     id: 2, 
     label: "Telegram", 
     icon: FaTelegram, 
-    value: "#",
+    value: "https://t.me/201017194475",
     isLink: true 
   },
   { 
     id: 3, 
     label: "Whatsapp", 
     icon: FaWhatsapp, 
-    value: "https://wa.me/201062426868",
+    value: "https://wa.me/201012312000",
     isLink: true 
   },
   { 
@@ -72,7 +72,7 @@ const contactMethods = [
 export default function ContactUsPage() {
   return (
     <div className="pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className={`card mb-6`}>
+      <div className={`card mb-6 mt-10`}>
         <div className="p-1 rounded-lg border border-[#232323]">
           <Phone size={30} className="text-(--main-color)" />
         </div>

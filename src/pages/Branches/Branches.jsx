@@ -12,6 +12,7 @@ const data = [
       { id: 4, name: "شبين الكوم", images: ["/images/22.png"], address: "شارع جمال عبد الناصر - أمام نادي الجمهورية - برج الجمهورية", mapImg: "/images/24.png" },
       { id: 5, name: "كفر الشيخ", images: ["/images/22.png"], address: "شارع الخليفة المأمون - كفر الشيخ", mapImg: "/images/24.png" },
       { id: 6, name: "ايتاي", images: ["/images/22.png"], address: "ايتاي البارود - البحيرة", mapImg: "/images/24.png" },
+      { id: 6, name: "القاهرة", images: ["/images/22.png"], address: "ايتاي البارود - البحيرة", mapImg: "/images/24.png" },
     ]
   },
   {
@@ -72,7 +73,7 @@ export default function Branches() {
     <div className='pb-20 mx-auto'>
       {/* Page Title Card */}
       <div
-        className={`card mb-4 cursor-pointer`}
+        className={`card mt-10 mb-4 cursor-pointer`}
         onClick={() => setView('categories')}
       >
         <MapPinned size={40} className="text-(--main-color)" />
@@ -183,7 +184,7 @@ export default function Branches() {
               <img 
                 src={selectedBranch.mapImg} 
                 alt="Map" 
-                className="w-full h-auto object-cover" 
+                className="w-full h-full object-cover" 
               />
             </div>
             <div className="bg-black/50 p-4 rounded-md border border-(--main-color)/20 w-full">

@@ -9,15 +9,14 @@ export default function ReservationPatientInfo({setCurrentStep}) {
                 <p className='text-white text-center font-bold'>إملأ بيانات المريض </p>
               </div>
     
-              <div className='flex flex-col gap-3'>
-                <CustomInput placeholder={"اسم الأب"} />
-                <CustomInput placeholder={"اسم الأم"} />
-                <CustomInput placeholder={"التليفون"} />
-                <CustomSelect 
-                  placeholder={"الطبيب المعالج"} 
-                  options={[]} 
-                />
-              </div>
+               <div className='flex flex-col gap-3'>
+                      <CustomInput placeholder={"اسم الطفل"} />
+                      <CustomInput placeholder={"اسم الأب"} />
+                      <CustomInput placeholder={"اسم الأم"} />
+                      <CustomInput placeholder={"التليفون"} />
+                      <CustomInput placeholder={"العمر"} />
+                   
+                    </div>
 
               <button onClick={() => setCurrentStep(3)} className="auth_btn ms-auto!">للاستمرار</button>
             </div>

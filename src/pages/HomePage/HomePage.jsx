@@ -30,13 +30,13 @@ const data = [
   {
     id: 5,
     name: "الأكاديمية",
-    img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1751879311/3_f6senc.png",
+    img: "/images/academy.png",
     link: "/accounts-management",
   },
   {
     id: 6,
     name: "أخبارنا",
-    img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1751879311/4_skbuzb.png",
+    img: "/images/news.png",
     link: "/legal-management",
   },
   {
@@ -62,10 +62,12 @@ const data = [
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(null);
   return (
-    <div>
-      <img className='h-[250px] mx-auto' src="https://res.cloudinary.com/dbz6ebekj/image/upload/v1753707646/%D9%81%D8%A4%D8%A7%D8%AF_2_bwfrzk.png" alt="fouady logo" />
+    <div className=''>
+      <img className='h-[130px] my-10 mx-auto' 
+      src="/images/logo.png" alt="fouady logo" />
+      {/* <img className='h-[250px] mx-auto' src="https://res.cloudinary.com/dbz6ebekj/image/upload/v1753707646/%D9%81%D8%A4%D8%A7%D8%AF_2_bwfrzk.png" alt="fouady logo" /> */}
 
       <div className="grid max-w-[250px] mx-auto  grid-cols-3 mb-[40px] gap-[11px] items-center justify-center">
         {data?.map((item) => (

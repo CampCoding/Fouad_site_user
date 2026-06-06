@@ -44,7 +44,7 @@ export default function Reservations() {
 
   return (
     <div className="pb-20">
-      <div className={`card mb-6`}>
+      <div className={`card mt-10 mb-6`}>
         <img
           src="https://res.cloudinary.com/dbz6ebekj/image/upload/v1741685480/20_gatefn.png"
           className='object-contain'

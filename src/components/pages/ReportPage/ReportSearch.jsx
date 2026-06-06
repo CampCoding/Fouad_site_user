@@ -31,7 +31,8 @@ export default function ReportSearch() {
       service_date: "",
       branch: "",
       hospital_nurserry: "",
-      phone: ""
+      phone: "",
+      governate:"",
     }
   });
 
@@ -47,7 +48,7 @@ export default function ReportSearch() {
         className="flex items-center justify-between h-[38.4px] mt-6 bg-[#171717] border-2 border-(--main-color) rounded-[4px] cursor-pointer group focus-within:border-(--main-color) transition-all"
       >
         <div className="flex-1 px-3 text-center truncate">
-          <span className={`text-sm text-center text-white`}>
+          <span className={`text-sm text-center text-white font-bold`}>
             البحث
           </span>
         </div>
@@ -90,6 +91,13 @@ export default function ReportSearch() {
             control={control}
             render={({ field }) => (
               <CustomDate placeholder={"تاريخ الخدمة"} value={field.value} onChange={field.onChange} error={errors.service_date} />
+            )}
+          />
+          <Controller
+            name="governate"
+            control={control}
+            render={({ field }) => (
+              <CustomSelect placeholder={"المحافظة"} value={field.value} onChange={field.onChange} error={errors.governate} options={[]} />
             )}
           />
           <Controller

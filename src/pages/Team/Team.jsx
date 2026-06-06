@@ -99,7 +99,7 @@ export default function Team() {
     <div className='pb-20 mx-auto'>
       {/* Page Title Card */}
       <div
-        className={`card mb-4 cursor-pointer`}
+        className={`card mb-4 mt-10 cursor-pointer`}
         onClick={() => setView('categories')}
       >
         <Users2 size={40} className="text-(--main-color)" />
@@ -125,7 +125,7 @@ export default function Team() {
           {data.map((item) => (
             <div key={item.id} className="flex flex-col gap-1">
               <div
-                onClick={() => toggleAccordion(item.id)}
+                onClick={() => handleCategoryClick(item)}
                 className="flex items-center px-4 h-[38.4px] 
                  bg-[linear-gradient(90deg,rgba(36,36,36,0.63),rgba(64,64,64,0.63))]
                  border rounded-lg border-(--main-color)/40 cursor-pointer hover:bg-white/5 transition-colors"
@@ -139,7 +139,7 @@ export default function Team() {
                 />
               </div>
 
-              <div
+              {/* <div
                 className={`overflow-hidden transition-all duration-300 ease-in-out ${openId === item.id ? 'max-h-[500px] opacity-100 py-3' : 'max-h-0 opacity-0'}`}
               >
                 <div className="flex flex-col gap-2 px-2">
@@ -152,7 +152,7 @@ export default function Team() {
                     <p className="text-[#eee] font-medium text-[13px]">عرض الفريق</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

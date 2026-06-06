@@ -34,7 +34,7 @@ export default function CustomSelect({
         {/* Selected value or placeholder */}
         <div className="flex-1 px-3 text-start truncate flex items-center gap-2">
           {selectedOption?.img && (
-            <img src={selectedOption.img} alt={selectedOption.label} className="w-5 h-5 object-contain" />
+            <img src={selectedOption.img} alt={selectedOption.label} className="w-7 h-7 object-contain" />
           )}
           {selectedOption?.icon && (
             <span className="text-white">{selectedOption.icon}</span>
@@ -72,7 +72,7 @@ export default function CustomSelect({
                 }`}
               >
                 {option.img && (
-                  <img src={option.img} alt={option.label} className="w-6 h-6 object-contain" />
+                  <img src={option.img} alt={option.label} className="w-8 h-8 object-contain" />
                 )}
                 {option.icon && (
                   <span className="text-lg">{option.icon}</span>

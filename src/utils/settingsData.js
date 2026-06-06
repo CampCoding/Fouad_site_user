@@ -43,32 +43,32 @@ export const SETTINGS_DATA = [
     //         }
     //     ]
     // },
-    // {
-    //     id: 2,
-    //     title: "اللغة",
-    //     data: [
-    //         {
-    //             id: 1,
-    //             title: "اللغة",
-    //             isDropDown: true,
-    //             data: [
-    //                 {
-    //                     id: 1,
-    //                     label: "العربيه",
-    //                     title: "العربيه",
-    //                     value: "arabic"
-    //                 },
-    //                 {
-    //                     id: 2,
-    //                     title: "الإنجليزية",
-    //                     label: "الإنجليزية",
-    //                     value: "english"
-    //                 }
-    //             ]
-    //         },
+    {
+        id: 2,
+        title: "اللغة",
+        data: [
+            {
+                id: 1,
+                title: "اللغة",
+                isDropDown: true,
+                data: [
+                    {
+                        id: 1,
+                        label: "العربيه",
+                        title: "العربيه",
+                        value: "arabic"
+                    },
+                    {
+                        id: 2,
+                        title: "الإنجليزية",
+                        label: "الإنجليزية",
+                        value: "english"
+                    }
+                ]
+            },
 
-    //     ]
-    // },
+        ]
+    },
     {
         id: 3,
         title: "بطاقات الدفع الالكتروني",

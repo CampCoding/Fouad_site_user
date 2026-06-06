@@ -14,8 +14,9 @@ export default function ReservationExternalPatient({ setCurrentStep }) {
         <CustomInput placeholder={"اسم الأب"} />
         <CustomInput placeholder={"اسم الأم"} />
         <CustomInput placeholder={"التليفون"} />
+        <CustomInput placeholder={"العمر"} />
         <CustomSelect 
-          placeholder={"القسم"} 
+          placeholder={"الطبيب المعالج"} 
           options={[]} 
         />
       </div>

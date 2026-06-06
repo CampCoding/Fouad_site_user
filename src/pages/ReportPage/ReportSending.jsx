@@ -33,13 +33,13 @@ export default function ReportSending() {
     { id: 2, text: "لإرسال التقرير عبر واتس آب", btn: "إرسل", platform: "whatsapp" },
     { id: 3, text: "لإرسال التقرير عبر تيليجرام", btn: "إرسل", platform: "telegram" },
     { id: 4, text: "لإرسال التقرير عبر الإيميل", btn: "إرسل", platform: "email" },
-    { id: 5, text: "إنسخ رابط الدعوة", btn: "إنسخ", platform: "copy" },
+    { id: 5, text: "إنسخ رابط التقرير", btn: "إنسخ", platform: "copy" },
   ];
 
   return (
     <div className='pb-10 animate-in fade-in duration-300'>
       {/* Page Title Card */}
-      <div className={`card`}>
+      <div className={`card mt-10`}>
         <img src={"https://res.cloudinary.com/dbz6ebekj/image/upload/v1741685481/21_pq4p6t.png"} className='object-contain' width={40} height={40} alt="report icon" />
         <p className="font-bold text-[17px] cursor-pointer text-[#eee]">
           التقارير
@@ -48,7 +48,7 @@ export default function ReportSending() {
 
       {/* Page Header Bar */}
       <div className="border h-[38.4px] mt-8 flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px] shadow-[0_0_10px_rgba(212,154,62,0.1)]">
-        <p className='text-white text-center font-bold'>لإرسال التقرير للطبيب المعالج</p>
+        <p className='text-white text-center font-bold'>لإرسال التقرير </p>
       </div>
 
       {/* Top Report Info Grid */}

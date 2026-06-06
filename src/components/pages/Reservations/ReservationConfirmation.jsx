@@ -1,14 +1,17 @@
 import { CircleCheckBig } from 'lucide-react';
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router';
+import React, { useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router';
 
 export default function ReservationConfirmation({ setCurrentStep, showInstructions = true }) {
 
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [reservationDone, setReservationDone] = useState(false);
   const navigate = useNavigate();
+  
+  const location = useLocation();
+  const isExternalReservation = location.pathname == "/reservations/external"
 
-  const data = [
+  const internal_data = [
     { label: "نوع الخدمة", value: "جلسة تخاطب" },
     { label: "الخدمة", value: "الكشف" },
     { label: "الفرع", value: "فرع المعادي" },
@@ -22,6 +25,25 @@ export default function ReservationConfirmation({ setCurrentStep, showInstructio
     { label: "طريقة الدفع", value: "إنستاباي" },
     { label: "السعر", value: "500 ج.م" },
   ];
+
+  const externtal_data = [
+    { label: "نوع الخدمة", value: "جلسة تخاطب" },
+    { label: "الخدمة", value: "الكشف" },
+    { label: "المحافظه", value: "الغربية" },
+    { label: "المدينة", value: "طنطا" },
+    { label: "المستشفي", value: "دار القمة" },
+    { label: "التاريخ", value: "2024-05-12" },
+    { label: "خلال مدة", value: ""},
+    { label: "التليفون", value: "01234567890" },
+    { label: "اسم الطفل", value: "أحمد محمد" },
+    { label: "اسم الأب", value: "محمد علي" },
+    { label: "طريقة الدفع", value: "إنستاباي" },
+    { label: "السعر", value: "500 ج.م" },
+  ];
+
+  const data = useMemo(() =>  {
+    return isExternalReservation ? externtal_data : internal_data
+  } , [location.pathname])
 
   return (
     <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
