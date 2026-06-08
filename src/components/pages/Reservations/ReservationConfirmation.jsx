@@ -2,7 +2,7 @@ import { CircleCheckBig } from 'lucide-react';
 import React, { useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router';
 
-export default function ReservationConfirmation({ setCurrentStep, showInstructions = true }) {
+export default function ReservationConfirmation({ currentStep, setSearchParams, selectedServiceId, showInstructions = true }) {
 
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [reservationDone, setReservationDone] = useState(false);
@@ -45,8 +45,15 @@ export default function ReservationConfirmation({ setCurrentStep, showInstructio
     return isExternalReservation ? externtal_data : internal_data
   } , [location.pathname])
 
+  // Function to go to a specific step
+  const goToStep = (stepNum) => {
+    setSearchParams(prev => {
+      prev.set('step', String(stepNum));
+      return prev;
+    });
+  };
   return (
-    <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="flex flex-col  gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
 
 
       {!isConfirmed ?
@@ -94,7 +101,7 @@ export default function ReservationConfirmation({ setCurrentStep, showInstructio
           {/* Buttons */}
           <div className="grid grid-cols-2 gap-4 mt-2">
             <button
-              onClick={() => setCurrentStep(3)}
+              onClick={() => goToStep(1)}
               className="auth_btn w-full! py-3! font-bold! text-sm shadow-[0_0_15px_rgba(var(--main-bg-rgb),0.2)]"
             >
               تعديل الحجز
@@ -153,7 +160,7 @@ export default function ReservationConfirmation({ setCurrentStep, showInstructio
             {/* Buttons */}
             <div className={`grid ${showInstructions ? 'grid-cols-3' : 'grid-cols-2'} w-full! gap-4 mt-2`}>
               <button
-                onClick={() => setCurrentStep(3)}
+                onClick={() => goToStep(3)}
                 className="auth_btn w-full! py-3! font-bold! text-sm shadow-[0_0_15px_rgba(var(--main-bg-rgb),0.2)]"
               >
                 تعديل الحجز
@@ -165,7 +172,7 @@ export default function ReservationConfirmation({ setCurrentStep, showInstructio
               </button>
               {showInstructions && (
                 <button
-                  onClick={() => navigate(`/reservations-instruction`)}
+                  onClick={() => navigate(`/reservations-instruction?svc=${isExternalReservation ? "2" :isOnlineReservation ? "3" :"1"}`)}
                   className="auth_btn w-full! py-3! font-bold! text-sm shadow-[0_0_15px_rgba(var(--main-bg-rgb),0.2)]"
                 >
                   للتعليمات

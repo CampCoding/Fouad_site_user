@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
-import { Printer, Share2, FolderClosed } from 'lucide-react';
-import { useNavigate } from 'react-router';
+import React from 'react';
+import { useSearchParams, useNavigate } from 'react-router';
+import { Printer, Share2, FolderClosed, ChevronDown } from 'lucide-react';
 
 export default function ReportFiles({ records = [], selectedRecord, onSelect, onOpen, onPrint }) {
-  const [isOpenFiles, setIsOpenFiles] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const isOpenFiles = searchParams.get('filesOpen') === 'true';
+
+  const toggleOpenFiles = () => {
+    setSearchParams(prev => {
+      prev.set('filesOpen', String(!isOpenFiles));
+      return prev;
+    });
+  };
 
   return (
     <div className="mt-6 animate-in fade-in duration-300">
       {/* Files Section Header */}
-      <div
-        onClick={() => setIsOpenFiles(!isOpenFiles)}
-        className="flex items-center justify-between h-[38.4px] bg-[#171717] border-2 border-(--main-color) rounded-[4px] cursor-pointer transition-all"
-      >
+      <div onClick={toggleOpenFiles} className="flex items-center justify-between h-[38.4px] bg-[#171717] border-2 border-(--main-color) rounded-[4px] cursor-pointer transition-all">
         <div className="flex-1 px-3 text-center truncate">
           <span className={`text-sm text-center text-white font-bold`}>
             الملفات
@@ -20,40 +26,37 @@ export default function ReportFiles({ records = [], selectedRecord, onSelect, on
         </div>
 
         <div className="h-full aspect-square flex items-center justify-center">
-          <img
-            src="https://res.cloudinary.com/dbz6ebekj/image/upload/v1742382414/icons_fouady_6_kyj440.png"
-            alt="chevron down"
-            className={`w-4 h-4 transition-transform ${isOpenFiles ? 'rotate-180' : ''}`}
+          <ChevronDown className={`w-4 h-4 text-(--main-color) transition-transform ${isOpenFiles ? 'rotate-180' : ''}`}
           />
         </div>
       </div>
 
       {/* Files Records Grid */}
       {isOpenFiles && (
-        <div className="mt-4 flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
+        <div className="mt-4 px-2 max-h-[400px] overflow-y-auto flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
           {records.map((record) => (
             <div
               key={record.id}
               onClick={() => onSelect(record)}
               className={`grid grid-cols-4 gap-1 cursor-pointer transition-all rounded-[4px]`}
             >
-              <div className={`${selectedRecord?.id === record.id ? 'border-(--main-color)' : 'border-(--main-color)/30'
-                } bg-[linear-gradient(90deg,rgb(0,0,0),#73737320)] border p-2 text-center rounded-[4px]`}>
+              <div className={`${selectedRecord?.id === record.id ? 'border-(--main-bg-color)! bg-(--main-bg-color)! text-white!' : 'border-(--main-color)/30'
+                } border p-2 text-center rounded-[4px]`}>
                 <p className="text-[#eee] text-[10px] font-bold">{record.child}</p>
               </div>
 
-              <div className={`${selectedRecord?.id === record.id ? 'border-(--main-color)' : 'border-(--main-color)/30'
-                } bg-[linear-gradient(90deg,rgb(0,0,0),#73737320)] border p-2 text-center rounded-[4px]`}>
+              <div className={`${selectedRecord?.id === record.id ? 'border-(--main-bg-color)! bg-(--main-bg-color)! text-white!' : 'border-(--main-color)/30'
+                }  border p-2 text-center rounded-[4px]`}>
                 <p className="text-[#eee] text-[10px] font-bold">{record.father}</p>
               </div>
 
-              <div className={`${selectedRecord?.id === record.id ? 'border-(--main-color)' : 'border-(--main-color)/30'
-                } bg-[linear-gradient(90deg,rgb(0,0,0),#73737320)] border p-2 text-center rounded-[4px]`}>
+              <div className={`${selectedRecord?.id === record.id ? 'border-(--main-bg-color)! bg-(--main-bg-color)! text-white!' : 'border-(--main-color)/30'
+                } border p-2 text-center rounded-[4px]`}>
                 <p className="text-[#eee] text-[10px] font-bold">{record.service}</p>
               </div>
 
-              <div className={`${selectedRecord?.id === record.id ? 'border-(--main-color)' : 'border-(--main-color)/30'
-                } bg-[linear-gradient(90deg,rgb(0,0,0),#73737320)] border p-2 text-center rounded-[4px]`}>
+              <div className={`${selectedRecord?.id === record.id ? 'border-(--main-bg-color)! bg-(--main-bg-color)! text-white!' : 'border-(--main-color)/30'
+                } border p-2 text-center rounded-[4px]`}>
                 <p className="text-[#eee] text-[10px] font-bold">{record.date}</p>
               </div>
             </div>

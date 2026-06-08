@@ -11,6 +11,11 @@ export default function ReportPage() {
     { id: 1, child: "اسم الطفل", father: "اسم الأب", service: "الخدمة", date: "تاريخ الخدمة" },
     { id: 2, child: "اسم الطفل", father: "اسم الأب", service: "الخدمة", date: "تاريخ الخدمة" },
     { id: 3, child: "اسم الطفل", father: "اسم الأب", service: "الخدمة", date: "تاريخ الخدمة" },
+    { id: 4, child: "اسم الطفل", father: "اسم الأب", service: "الخدمة", date: "تاريخ الخدمة" },
+    { id: 5, child: "اسم الطفل", father: "اسم الأب", service: "الخدمة", date: "تاريخ الخدمة" },
+    { id: 6, child: "اسم الطفل", father: "اسم الأب", service: "الخدمة", date: "تاريخ الخدمة" },
+    { id: 7, child: "اسم الطفل", father: "اسم الأب", service: "الخدمة", date: "تاريخ الخدمة" },
+    { id: 8, child: "اسم الطفل", father: "اسم الأب", service: "الخدمة", date: "تاريخ الخدمة" },
   ];
 
   const handleOpen = () => {

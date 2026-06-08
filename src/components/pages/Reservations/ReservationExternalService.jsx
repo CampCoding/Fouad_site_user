@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CustomSelect from '../../Common/CustomSelect';
 
-export default function ReservationExternalService({ setCurrentStep }) {
+export default function ReservationExternalService({ currentStep, setSearchParams }) {
   const [details, setDetails] = useState({
     service: '',
     type: '',
@@ -12,6 +12,13 @@ export default function ReservationExternalService({ setCurrentStep }) {
 
   const isContinueEnabled = details.service && details.type && details.governorate && details.city && details.hospital;
 
+  // Function to advance to the next step
+  const handleNextStep = () => {
+    setSearchParams(prev => {
+      prev.set('step', String(currentStep + 1));
+      return prev;
+    });
+  };
   return (
     <div className="flex flex-col gap-3 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="border h-[38.4px] mb-4 flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px]">
@@ -55,7 +62,7 @@ export default function ReservationExternalService({ setCurrentStep }) {
       </div>
 
       <button 
-        onClick={() => setCurrentStep(2)}
+        onClick={handleNextStep}
         className={`auth_btn mt-3 ms-auto! ${!isContinueEnabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         disabled={!isContinueEnabled}
       >

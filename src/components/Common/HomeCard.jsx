@@ -5,7 +5,7 @@ export default function HomeCard({
   onClick, 
   activeId, 
   className = "", 
-  imgClass = "w-[30px] h-[30px]",
+  imgClass = "w-[35px] h-[35px]",
   textClass = "text-[11px]",
   border = false,
   style = {}
@@ -16,7 +16,7 @@ export default function HomeCard({
     <div
       onClick={onClick}
       style={style}
-      className={`mx-auto cursor-pointer w-[76px] h-[76px] bg-[linear-gradient(90deg,rgba(36,36,36,0.63),rgba(64,64,64,0.63))] rounded-lg flex flex-col gap-[8px] items-center justify-center border-[2px] transition-all ${
+      className={`mx-auto cursor-pointer w-[86px] h-[86px] bg-[linear-gradient(90deg,rgba(36,36,36,0.63),rgba(64,64,64,0.63))] rounded-lg flex flex-col gap-[8px] items-center justify-center border-[2px] transition-all ${
         isActive || border ? "border-[#d49a3e]" : "border-transparent"
       } ${className}`}
     >

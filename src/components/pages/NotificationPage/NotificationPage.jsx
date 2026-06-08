@@ -48,7 +48,7 @@ export default function NotificationPage() {
           {/* Step 1: Report Details Table */}
           {step === 1 && (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="grid grid-cols-4 gap-1 mb-6">
+              <div className="grid grid-cols-4 gap-1 mb-6 text-white text-[10px] font-bold">
                 <div className="bg-[linear-gradient(90deg,rgb(0,0,0),#73737320)] border border-(--main-color)/30 p-2 text-center rounded">
                    <p className="text-white text-[10px] font-bold">{record.child}</p>
                 </div>
@@ -115,25 +115,35 @@ export default function NotificationPage() {
         {/* Global Action Toolbar (Matches Image 1 bottom icons) */}
         {step === 1 && (
              <div className="grid grid-cols-5 w-full gap-2 mt-10">
-                <button className="bg-[#171717] p-4 rounded-xl flex flex-col items-center gap-2 border border-white/5 hover:border-(--main-color)/30 transition-all">
+                {/* Open Button - Navigates to reports page, passing the notification ID as reportId */}
+                <button
+                  onClick={() => navigate(`/reports?reportId=${id}`)}
+                  className="bg-[#171717] p-4 rounded-xl flex flex-col items-center gap-2 border border-white/5 hover:border-(--main-color)/30 transition-all"
+                >
                     <img src="https://res.cloudinary.com/dbz6ebekj/image/upload/v1741685481/21_pq4p6t.png" className="w-6 h-6" alt="" />
                 </button>
+                {/* Send Button */}
                 <button className="bg-[#171717] p-4 rounded-xl flex flex-col items-center gap-2 border border-white/5 hover:border-(--main-color)/30 transition-all">
                     <Share2 className="text-(--main-color) w-6 h-6" />
                 </button>
+                {/* Ship Button */}
                 <button className="bg-[#171717] p-4 rounded-xl flex flex-col items-center gap-2 border border-white/5 hover:border-(--main-color)/30 transition-all">
                     <FolderClosed className="text-(--main-color) w-6 h-6" />
                 </button>
+                {/* Print Button */}
                 <button className="bg-[#171717] p-4 rounded-xl flex flex-col items-center gap-2 border border-white/5 hover:border-(--main-color)/30 transition-all">
                     <Printer className="text-(--main-color) w-6 h-6" />
                 </button>
-                 <button className="bg-[#171717] p-4 rounded-xl flex flex-col items-center gap-2 border border-white/5 hover:border-(--main-color)/30 transition-all">
+                {/* Book Button - Navigates to reservations page */}
+                <button
+                  onClick={() => navigate('/reservations')}
+                  className="bg-[#171717] p-4 rounded-xl flex flex-col items-center gap-2 border border-white/5 hover:border-(--main-color)/30 transition-all"
+                >
                     <img src="https://res.cloudinary.com/dbz6ebekj/image/upload/v1741685480/20_gatefn.png" className="w-6 h-6" alt="" />
                 </button>
              </div>
         )}
       </div>
-
     </div>
   );
 }

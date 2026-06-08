@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CustomSelect from '../../Common/CustomSelect';
-import { useNavigate } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 
 
 const services = [
@@ -66,43 +66,63 @@ const times = [
 ];
 
 
-export default function ReservationChooseService({setCurrentStep , setSelectedService, selectedService }) {
+export default function ReservationChooseService({ currentStep, selectedServiceId, setSearchParams }) {
   const navigate = useNavigate();
-  const [subStep, setSubStep] = useState(1);
-
+  
+  // Internal state for form details, not directly tied to URL params yet
   const [details, setDetails] = useState({ service: '', type: '', branch: '' });
   const [selectedDate, setSelectedDate] = useState(1); // Today by default
   const [selectedTime, setSelectedTime] = useState(null);
   
   const dates = generateDates();
 
-  const handleContinue = () => {
-    if (subStep === 1) {
-      if (selectedService === 2) {
-        navigate('/reservations/external');
-      } else if (selectedService === 3) {
-        navigate('/reservations/online');
-      } else if (selectedService) {
-        setSubStep(2);
+  // Function to update the 'svc' search parameter
+  const handleSelectServiceType = (serviceId) => {
+    setSearchParams(prev => {
+      prev.set('svc', String(serviceId));
+      // If a service is selected, ensure we are on step 1 of that service type
+      if (!prev.has('step')) {
+        prev.set('step', '1');
       }
-    } else if (subStep === 2) {
-
-      if (details.service && details.type && details.branch) setSubStep(3);
-    } else if (subStep === 3) {
-      if (selectedDate && selectedTime) setCurrentStep(2);
-    }
+      return prev;
+    });
   };
 
-  const isContinueEnabled = () => {
-    if (subStep === 1) return !!selectedService;
-    if (subStep === 2) return details.service && details.type && details.branch;
-    if (subStep === 3) return selectedDate && selectedTime;
-    return false;
+  const handleContinue = () => {
+    if (currentStep === 1) {
+      if (selectedServiceId === 2) { // External
+        navigate(`/reservations/external?step=1&svc=${selectedServiceId}`);
+      } else if (selectedServiceId === 3) { // Online
+        navigate(`/reservations/online?step=1&svc=${selectedServiceId}`);
+      } else if (selectedServiceId === 1) { // Internal
+        setSearchParams(prev => {
+          prev.set('step', '2');
+          return prev;
+        });
+      }
+    } else if (currentStep === 2) {
+      if (details.service && details.type && details.branch) {
+        setSearchParams(prev => {
+          prev.set('step', '3');
+          return prev;
+        });
+      }
+    } else if (currentStep === 3) {
+      if (selectedDate && selectedTime) {
+        // This component doesn't directly set the next step for the main flow,
+        // it's handled by the parent Reservations component.
+        // For now, let's just update the step to 4 (Patient Info)
+        setSearchParams(prev => {
+          prev.set('step', '4');
+          return prev;
+        });
+      }
+    }
   };
 
   return (
     <div className="flex flex-col gap-3">
-      {subStep === 1 ? (
+      {currentStep === 1 && (
         <div>
           <div className="border h-[38.4px] mb-4 flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px]">
             <p className='text-white text-center font-bold'>اختار نوع الخدمة</p>
@@ -110,10 +130,10 @@ export default function ReservationChooseService({setCurrentStep , setSelectedSe
           <div className='flex flex-col gap-3'>
             {services.map((service) => (
               <div
-                onClick={() => setSelectedService(service.id)}
+                onClick={() => handleSelectServiceType(service.id)}
                 key={service.id}
                 className={`flex border bg-[#171717] p-1 rounded-[4px] text-white gap-8 items-center cursor-pointer transition-all duration-300 
-                    ${selectedService == service.id ? 'border-(--main-bg-color)! bg-(--main-bg-color)! text-white!' : 'border-[#232323]!'}`}
+                    ${selectedServiceId == service.id ? 'border-(--main-bg-color)! bg-(--main-bg-color)! text-white!' : 'border-[#232323]!'}`}
               >
                 <p>{service.name}</p>
                 <p>{service.description}</p>
@@ -121,7 +141,9 @@ export default function ReservationChooseService({setCurrentStep , setSelectedSe
             ))}
           </div>
         </div>
-      ) : subStep === 2 ? (
+      )}
+
+      {currentStep === 2 && selectedServiceId === 1 && ( // Only show for internal service
         <div className="flex flex-col gap-3">
           <div className="border h-[38.4px] mb-4 flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px]">
             <p className='text-white text-center font-bold'>إملأ بيانات الخدمة </p>
@@ -148,7 +170,9 @@ export default function ReservationChooseService({setCurrentStep , setSelectedSe
             />
           </div>
         </div>
-      ) : (
+      )}
+
+      {currentStep === 3 && selectedServiceId === 1 && ( // Only show for internal service
         <div className="flex flex-col gap-3">
           <div className="border h-[38.4px] mb-4 flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px]">
             <p className='text-white text-center font-bold'>إختار ميعاد الخدمة</p>
@@ -193,8 +217,8 @@ export default function ReservationChooseService({setCurrentStep , setSelectedSe
 
       <button 
         onClick={handleContinue}
-        className={`auth_btn mt-3 ms-auto! ${!isContinueEnabled() ? 'opacity-50 cursor-not-allowed' : ''}`}
-        disabled={!isContinueEnabled()}
+        className={`auth_btn mt-3 ms-auto! ${!((currentStep === 1 && selectedServiceId) || (currentStep === 2 && details.service && details.type && details.branch) || (currentStep === 3 && selectedDate && selectedTime)) ? 'opacity-50 cursor-not-allowed' : ''}`}
+        disabled={!((currentStep === 1 && selectedServiceId) || (currentStep === 2 && details.service && details.type && details.branch) || (currentStep === 3 && selectedDate && selectedTime))}
       >
         الاستمرار
       </button>

@@ -57,7 +57,7 @@ const times = [
   { time: "17:30", reserved: false },
 ];
 
-export default function ReservationOnlineService({ setCurrentStep }) {
+export default function ReservationOnlineService({ currentStep, setSearchParams }) {
   const [subStep, setSubStep] = useState(1);
   const [details, setDetails] = useState({
     service: '',
@@ -85,6 +85,13 @@ export default function ReservationOnlineService({ setCurrentStep }) {
 
   const isFormEnabled = details.service && details.type && details.governorate && details.city && details.hospital;
 
+  // Function to advance to the next step
+  const handleNextStep = () => {
+    setSearchParams(prev => {
+      prev.set('step', String(currentStep + 1));
+      return prev;
+    });
+  };
   // Sub-step 1: Fill Service Data
   if (subStep === 1) {
     return (
@@ -125,7 +132,7 @@ export default function ReservationOnlineService({ setCurrentStep }) {
           />
         </div>
         <button 
-          onClick={() => setSubStep(2)} 
+          onClick={() => setSubStep(2)} // This is an internal sub-step, not a main step
           disabled={!isFormEnabled}
           className={`auth_btn mt-3 ms-auto! ${!isFormEnabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
@@ -187,7 +194,7 @@ export default function ReservationOnlineService({ setCurrentStep }) {
               <span className="text-(--main-color) text-xs font-bold">قيمة الاستشارة: {currentDoctor.price} جنيه</span>
             </div>
 
-            <button onClick={() => setSubStep(3)} className="auth_btn w-full mt-4 py-3 font-bold shadow-lg">حدد موعد</button>
+            <button onClick={() => setSubStep(3)} className="auth_btn w-full mt-4 py-3 font-bold shadow-lg">حدد موعد</button> {/* This is an internal sub-step, not a main step */}
           </div>
 
           {/* Slider Indicators */}
@@ -248,7 +255,7 @@ export default function ReservationOnlineService({ setCurrentStep }) {
       </div>
 
       <button 
-        onClick={() => setCurrentStep(2)} 
+        onClick={handleNextStep}
         disabled={!selectedTime}
         className={`auth_btn mt-6 ms-auto! ${!selectedTime ? 'opacity-50 cursor-not-allowed' : ''}`}
       >

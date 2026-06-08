@@ -8,7 +8,7 @@ import { X, Upload, CheckCircle2, Copy, Wallet, ArrowLeftRight, Info, UploadClou
 
 const USER_BALANCE = 500;
 
-export default function ReservationPayment({ setCurrentStep }) {
+export default function ReservationPayment({setSearchParams,   currentStep }) {
   const [hasCoupon, setHasCoupon] = useState(false);
   const [confirmCoupon, setConfirmCoupon] = useState(false);
   const [couponCode, setCouponCode] = useState('');
@@ -17,7 +17,6 @@ export default function ReservationPayment({ setCurrentStep }) {
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isTransferOpen, setIsTransferOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-
 
   const paymentOptions = [
     { value: 'balance', label: 'الدفع من خلال رصيدك في البرنامج', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889968/134_jj9les.png" },
@@ -37,6 +36,14 @@ export default function ReservationPayment({ setCurrentStep }) {
     setConfirmCoupon(false);
     setCouponCode('');
     setPrice('');
+  };
+
+  // Function to advance to the next step
+  const handleNextStep = () => {
+    setSearchParams(prev => {
+      prev.set('step', String(currentStep + 1));
+      return prev;
+    });
   };
 
   const selectedOption = paymentOptions.find(opt => opt.value === selectedMethod);
@@ -78,33 +85,35 @@ export default function ReservationPayment({ setCurrentStep }) {
           )}
         </div>
 
-        {/* Service Price Row */}
-        <div className="grid grid-cols-[1fr_0.5fr_0.7fr] gap-2 items-center">
-          <div className="flex flex-col gap-1">
-            <div className="text-white rounded-[4px] text-[12px] px-3 h-[38.4px] border border-[#232323] bg-[#171717] flex items-center justify-start">
-              سعر الخدمة
+        {/* Only show Service Price Row if not insurance/syndicate */}
+        {selectedMethod !== 'insurance' && selectedMethod !== 'doctors' && selectedMethod !== 'engineers' && (
+          <div className="grid grid-cols-[1fr_0.5fr_0.7fr] gap-2 items-center">
+            <div className="flex flex-col gap-1">
+              <div className="text-white rounded-[4px] text-[12px] px-3 h-[38.4px] border border-[#232323] bg-[#171717] flex items-center justify-start">
+                سعر الخدمة
+              </div>
+            </div>
+            
+            <div className="flex flex-col gap-1">
+              <CustomInput 
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="border-[#232323]! rounded-[4px]!" 
+                inputClassName="placeholder:text-white text-white text-center" 
+                placeholder={"السعر"} 
+              />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <button
+                onClick={() => setHasCoupon(prev => !prev)}
+                className={`bg-[#171717] rounded-[4px] text-[11px] h-[38.4px] text-white transition-all 
+                  ${hasCoupon ? 'border border-(--main-bg-color) shadow-[0_0_10px_rgba(var(--main-bg-rgb),0.3)]' : 'border border-[#232323]'}`}>
+                  لديك كود خصم؟
+              </button>
             </div>
           </div>
-          
-          <div className="flex flex-col gap-1">
-            <CustomInput 
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              className="border-[#232323]! rounded-[4px]!" 
-              inputClassName="placeholder:text-white text-white text-center" 
-              placeholder={"السعر"} 
-            />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <button
-              onClick={() => setHasCoupon(prev => !prev)}
-              className={`bg-[#171717] rounded-[4px] text-[11px] h-[38.4px] text-white transition-all 
-                ${hasCoupon ? 'border border-(--main-bg-color) shadow-[0_0_10px_rgba(var(--main-bg-rgb),0.3)]' : 'border border-[#232323]'}`}>
-                لديك كود خصم؟
-            </button>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Balance Specific UI */}
@@ -252,7 +261,7 @@ export default function ReservationPayment({ setCurrentStep }) {
         </div>
       )}
 
-      <button onClick={() => setCurrentStep(4)} className="auth_btn mt-6 ms-auto! w-min px-10">للإستمرار</button>
+      <button onClick={handleNextStep} className="auth_btn mt-6 ms-auto! w-min px-10">للإستمرار</button>
 
       {/* Upload Modal */}
       {isUploadOpen && (

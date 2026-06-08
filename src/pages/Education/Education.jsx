@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSearchParams, useNavigate } from 'react-router';
 import { HouseHeart, Triangle, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
 const data = [
@@ -149,79 +150,85 @@ const data = [
 ];
 
 export default function EducationPage() {
-  const [view, setView] = useState('categories'); // categories, slider, list, detail, video-list, video-player
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  // Derived state from search parameters
+  const view = searchParams.get('v') || 'categories';
+  const catId = searchParams.get('c');
+  const typeId = searchParams.get('t');
+  const artId = searchParams.get('a');
+  const itemId = searchParams.get('i');
+  const currentIndex = Number(searchParams.get('idx')) || 0;
+
+  // Data finding logic
+  const selectedCategory = data.find(item => String(item.id) === catId);
+  const selectedType = selectedCategory?.types.find(type => String(type.id) === typeId);
+  const selectedArticle = selectedType?.data?.find(art => String(art.id) === artId);
+  const selectedTopic = (view === 'detail') ? selectedArticle?.data?.find(topic => String(topic.id) === itemId) : null;
+  const selectedVideo = (view === 'video-player') ? selectedType?.data?.find(vid => String(vid.id) === itemId) : null;
+  const currentArticle = selectedType?.data?.[currentIndex];
+
   const [openId, setOpenId] = useState(null);
-  const [selectedType, setSelectedType] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedArticle, setSelectedArticle] = useState(null);
-  const [selectedTopic, setSelectedTopic] = useState(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
 
   const toggleAccordion = (id) => {
     setOpenId(openId === id ? null : id);
   };
 
   const handleTypeClick = (item, type) => {
-    if (type.name === "المقالات") {
-      if (type.data && type.data.length > 0) {
-        setSelectedType(type);
-        setCurrentIndex(0);
-        setView('slider');
-      }
-    } else if (type.name === "الفيديوهات") {
-      if (type.data && type.data.length > 0) {
-        setSelectedType(type);
-        setView('video-list');
-      }
+    if (type.data && type.data.length > 0) {
+      const nextView = type.name === "المقالات" ? "slider" : "video-list";
+      setSearchParams({ v: nextView, c: item.id, t: type.id, idx: 0 });
     }
   };
 
   const nextSlide = () => {
     if (selectedType?.data) {
-      setCurrentIndex((prev) => (prev + 1) % selectedType.data.length);
+      const nextIdx = (currentIndex + 1) % selectedType.data.length;
+      setSearchParams(prev => {
+        prev.set('idx', String(nextIdx));
+        return prev;
+      }, { replace: true });
     }
   };
 
-  const prevSlide = () => {
+   const prevSlide = () => {
     if (selectedType?.data) {
-      setCurrentIndex((prev) => (prev - 1 + selectedType.data.length) % selectedType.data.length);
+      const prevIdx = (currentIndex - 1 + selectedType.data.length) % selectedType.data.length;
+      setSearchParams(prev => {
+        prev.set('idx', String(prevIdx));
+        return prev;
+      }, { replace: true });
     }
   };
 
   const handleMoreClick = (article) => {
     if (article.data) {
-      setSelectedArticle(article);
-      setView('list');
+      setSearchParams({ v: 'list', c: catId, t: typeId, a: article.id });
     }
   };
 
   const handleTopicClick = (topic) => {
-    setSelectedTopic(topic);
-    setView('detail');
+    setSearchParams({ v: 'detail', c: catId, t: typeId, a: artId, i: topic.id });
   };
 
   const handleVideoClick = (video) => {
-    setSelectedVideo(video);
-    setView('video-player');
+    setSearchParams({ v: 'video-player', c: catId, t: typeId, i: video.id });
   };
 
   const handleBack = () => {
-    if (view === 'detail') setView('list');
-    else if (view === 'list') setView('slider');
-    else if (view === 'video-player') setView('video-list');
-    else if (view === 'video-list') setView('categories');
-    else if (view === 'slider') setView('categories');
+    if (view !== 'categories') {
+      navigate(-1);
+    }
   };
 
-  const currentArticle = selectedType?.data?.[currentIndex];
+  const handleGoHome = () => {
+    setSearchParams({});
+  };
 
   return (
     <div className='pb-20  mx-auto'>
-      {/* Page Title Card */}
-      <div 
-        className={`card mb-4 mt-10 cursor-pointer`}
-        onClick={() => setView('categories')}
-      >
+      <div className={`card mb-4 mt-10 cursor-pointer`} onClick={handleGoHome}>
         <HouseHeart size={40} className="text-(--main-color)" />
         <p className="font-bold text-[17px] text-[#eee]">
           التثقيف
@@ -229,10 +236,8 @@ export default function EducationPage() {
       </div>
 
       {/* Header / Navigation Bar */}
-      <div 
-        className="border h-[38.4px] mb-3 w-full flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px] relative cursor-pointer"
-        onClick={handleBack}
-      >
+      <div className="border h-[38.4px] mb-3 w-full flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px] relative cursor-pointer" 
+        onClick={handleBack}>
         {view !== 'categories' && (
           <ChevronRight className="absolute right-3 text-(--main-color)" size={20} />
         )}
@@ -274,9 +279,10 @@ export default function EducationPage() {
                     <div
                       key={type.id}
                       onClick={() => handleTypeClick(item, type)}
-                      className="h-[38.4px] border border-(--main-color)/40 flex justify-center items-center 
-                       bg-[linear-gradient(135deg,rgb(0,0,0),#4d4c4c)]
-                      rounded-lg cursor-pointer hover:border hover:border-(--main-color) transition-all"
+                      className={`h-[38.4px] border border-(--main-color)/40 flex justify-center items-center 
+                       bg-(--main-bg-color)
+                      rounded-lg cursor-pointer hover:border hover:border-(--main-color) transition-all 
+                      `}
                     >
                       <p className="text-[#eee] font-medium text-[13px]">{type.name}</p>
                     </div>
@@ -310,10 +316,10 @@ export default function EducationPage() {
             </button>
 
             {/* Navigation Arrows */}
-            <button onClick={prevSlide} className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-(--main-color) hover:scale-110 transition-transform">
+            <button onClick={nextSlide} className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-(--main-color) hover:scale-110 transition-transform">
               <ChevronLeft size={24} />
             </button>
-            <button onClick={nextSlide} className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-(--main-color) hover:scale-110 transition-transform">
+            <button onClick={prevSlide} className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-(--main-color) hover:scale-110 transition-transform">
               <ChevronRight size={24} />
             </button>
           </div>
@@ -326,7 +332,7 @@ export default function EducationPage() {
             <div
               key={topic.id}
               onClick={() => handleTopicClick(topic)}
-              className="flex items-center px-4 h-[38.4px] bg-black border border-(--main-color)/40 rounded-md cursor-pointer hover:bg-white/5 transition-colors"
+              className={`bg-black!  flex items-center px-4 h-[38.4px]  border border-(--main-color)/40 rounded-md cursor-pointer hover:bg-white/5 transition-colors`}
             >
               <Triangle size={10} className="text-(--main-color) rotate-180" fill="currentColor" />
               <p className="text-[#eee] font-medium text-center flex-1 text-[13px]">{topic.title}</p>

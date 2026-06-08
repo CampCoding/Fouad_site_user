@@ -64,7 +64,7 @@ export default function ReportSearch() {
 
       {/* Filter Grid */}
       {isOpen && (
-        <div className="grid grid-cols-2 mt-4 gap-[7px] items-center animate-in fade-in duration-300">
+        <div className="grid max-h-[400px] overflow-y-auto grid-cols-2 mt-4 gap-[7px] items-center animate-in fade-in duration-300">
           <Controller
             name="child_name"
             control={control}

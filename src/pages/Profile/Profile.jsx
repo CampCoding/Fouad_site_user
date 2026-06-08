@@ -1,6 +1,7 @@
 import { UserRound, Wallet, Calendar, FileText, Mail, Eye, Triangle, ChevronRight, Gift, Coins } from 'lucide-react'
 import React, { useState } from 'react'
 import HomeCard from '../../components/Common/HomeCard';
+import { useSearchParams, useNavigate, useLocation } from 'react-router';
 import PageTitle from '../../components/Common/PageTitle';
 import CustomInput from '../../components/Common/CustomInput';
 import CustomSelect from '../../components/Common/CustomSelect';
@@ -16,22 +17,43 @@ const menuItems = [
 ]
 
 export default function Profile() {
-  const [view, setView] = useState('menu');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const view = searchParams.get('v') || 'menu';
   const [profileData, setProfileData] = useState({
     name: "أحمد محمد أحمد",
     tel: "01234567890",
     job: "مهندس",
-    workplace: ""
+    workplace: "",
   });
+
+  // Function to update the view search parameter
+  const setViewParam = (newView) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('v', newView);
+    setSearchParams(newSearchParams);
+  };
   
-  const handleBack = () => setView('menu');
+  const handleBack = () => {
+    if (view !== 'menu') {
+      navigate(-1);
+    }
+  };
+
+  const handleGoHome = () => {
+    // Clear 'v' param to go to default 'menu' view, but keep other params if any
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.delete('v');
+    setSearchParams(newSearchParams);
+  };
 
   const reservationData = ["احمد محمد ", "إيكو", "طنطا", "12/5/2025", "11:00"];
 
   return (
     <div className='py-10 mx-auto'>
-      {/* Page Title Card */}
-      <div className="card mb-4 cursor-pointer" onClick={() => setView('menu')}>
+      <div className="card mb-4 cursor-pointer" onClick={handleGoHome}>
         <UserRound size={40} className="text-(--main-color)" />
         <p className="font-bold text-[17px] text-[#eee]">شخصي</p>
       </div>
@@ -60,9 +82,9 @@ export default function Profile() {
         <div className="grid grid-cols-3 gap-3 px-4 mt-6">
           {menuItems.map((item) => (
             <HomeCard
-              key={item.id}
+              key={item.id} // Use item.id as key
               item={item}
-              onClick={() => setView(item.view)}
+              onClick={() => setViewParam(item.view)} // Use setViewParam
               imgClass="w-[26px] h-[26px]"
               textClass="text-[10px]"
               className='w-full'
@@ -133,7 +155,9 @@ export default function Profile() {
                 <p className='text-center mb-2 text-[13.5px] text-(--main-color) font-bold'>تذكير بميعاد المتابعة</p>
                 <p className='text-center text-[15px]'>ميعاد المتابعة القادم بتاريخ 14-3-2025 </p>
             </div>
-            <button className='auth_btn py-2 px-8 self-end'>للحجز</button>
+            <button 
+            onClick={() => navigate(`/reservations?v=followers`)}
+            className='auth_btn py-2 px-8 self-end'>للحجز</button> {/* This navigation should be updated to use search params for reservations */}
           </div>
         </div>
       )}
@@ -147,7 +171,9 @@ export default function Profile() {
                 <p className='text-center text-[14px]'>لديك كوبون خصم 50 % على متابعة الايكو بمناسبة شهر رمضان الكريم</p>
                 <p className='text-center text-(--main-color) font-bold'>صالح حتى 15-2-2025</p>
             </div>
-            <button className='auth_btn py-2 px-8 self-end'>للاستخدام</button>
+            <button 
+            onClick={()=> navigate(`/reservations?v=offers`)}
+            className='auth_btn py-2 px-8 self-end'>للاستخدام</button> {/* This navigation should be updated to use search params for reservations */}
           </div>
         </div>
       )}
@@ -163,7 +189,9 @@ export default function Profile() {
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-xs text-white/70">يمكنك استخدام الرصيد في حجز الخدمات من خلال البرنامج</p>
-              <button className="auth_btn py-2 px-6 self-end">استخدام الرصيد</button>
+              <button
+              onClick={()=> navigate(`/reservations?v=balance`)}
+              className="auth_btn py-2 px-6 self-end">استخدام الرصيد</button> {/* This navigation should be updated to use search params for reservations */}
             </div>
             <div className="flex flex-col gap-2 mt-4">
                <div className="flex justify-between items-center border border-[#313130] bg-[#171717]/50 p-2 rounded">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router'
+import { useSearchParams, useNavigate } from 'react-router'
 
 const data = [
   {
@@ -29,11 +29,19 @@ const data = [
 ]
 
 export default function ReservationInstructions() {
-  const {type} = useParams();
-  const isExternal = type === 'external';
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const svc = Number(searchParams.get('svc'));
+  const isExternal = svc === 2; // Service ID 2 is for external services
+
+  const handleBack = () => {
+    navigate(-1); // Go back one step in browser history
+  };
+
   return (
-    <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-       <div className={`card mb-6`}>
+    <div className="flex flex-col gap-6 mb-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className={`card mb-6 mt-10`}>
         <img
           src="https://res.cloudinary.com/dbz6ebekj/image/upload/v1741685480/20_gatefn.png"
           className='object-contain'
@@ -41,7 +49,10 @@ export default function ReservationInstructions() {
           height={40}
           alt="reservation icon"
         />
-        <p className="font-bold text-[17px] cursor-pointer text-[#eee]">
+        <p
+          onClick={() => navigate('/reservations')} // Go to main reservations page
+          className="font-bold text-[17px] cursor-pointer text-[#eee]"
+        >
           الحجز
         </p>
       </div>
@@ -51,6 +62,7 @@ export default function ReservationInstructions() {
         <div className="border h-[40px] w-full flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px]">
           <p className='text-white text-center font-bold'>يرجي اتباع التعليمات الاتية</p>
         </div>
+        
 
         <div className="flex flex-col mt-4 gap-3">
           {data?.map(item => <div
@@ -65,7 +77,7 @@ export default function ReservationInstructions() {
           </div>)}
         </div>
 
-        <button className="auth_btn px-3 text-xs mx-auto! mt-3">لمزيد من معلومات عن الفحص</button>
+        <button className="auth_btn px-5 min-w-[250px] text-sm text-nowrap mx-auto! mt-3">لمزيد من المعلومات </button>
       </div>
     </div>
   )
