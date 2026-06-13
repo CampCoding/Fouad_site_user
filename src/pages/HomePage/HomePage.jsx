@@ -69,7 +69,7 @@ export default function HomePage() {
   
       <MainLogo />
 
-      <div className="grid max-w-[300px] mx-auto  grid-cols-3 mb-[40px] gap-[13px] items-center justify-center">
+      <div className="grid max-w-[400px] sm:max-w-[600px] mx-auto  grid-cols-3 mb-[40px] gap-[13px] sm:gap-[19px] items-center justify-center">
         {data?.map((item) => (
           <HomeCard 
             key={item.id}
