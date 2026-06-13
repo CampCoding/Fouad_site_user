@@ -172,7 +172,7 @@ export default function ReservationConfirmation({ currentStep, setSearchParams, 
               </button>
               {showInstructions && (
                 <button
-                  onClick={() => navigate(`/reservations-instruction?svc=${isExternalReservation ? "2" :isOnlineReservation ? "3" :"1"}`)}
+                  onClick={() => navigate(`/reservations-instruction?svc=${isExternalReservation ? "2" :"1"}`)}
                   className="auth_btn w-full! py-3! font-bold! text-sm shadow-[0_0_15px_rgba(var(--main-bg-rgb),0.2)]"
                 >
                   للتعليمات

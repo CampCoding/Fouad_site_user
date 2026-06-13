@@ -147,7 +147,7 @@ export default function Reservations() {
         )}
 
         {currentStep === 3 && (
-          <ReservationConfirmation currentStep={currentStep} setSearchParams={setSearchParams} selectedServiceId={selectedServiceId} showInstructions={!isOnline} />
+          <ReservationPayment currentStep={currentStep} setSearchParams={setSearchParams} selectedServiceId={selectedServiceId} showInstructions={!isOnline} />
         )}
         {currentStep === 4 && (
           <ReservationConfirmation currentStep={currentStep} setSearchParams={setSearchParams} showInstructions={!isOnline} />

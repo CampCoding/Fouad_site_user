@@ -66,12 +66,10 @@ export default function HomePage() {
   const [activeTab, setActiveTab] = useState(null);
   return (
     <div className=''>
-      {/* <img className='h-[130px] my-10 mx-auto' 
-      src="/images/logo.png" alt="fouady logo" /> */}
+  
       <MainLogo />
-      {/* <img className='h-[250px] mx-auto' src="https://res.cloudinary.com/dbz6ebekj/image/upload/v1753707646/%D9%81%D8%A4%D8%A7%D8%AF_2_bwfrzk.png" alt="fouady logo" /> */}
 
-      <div className="grid max-w-[300px] mx-auto  grid-cols-3 mb-[40px] gap-[11px] items-center justify-center">
+      <div className="grid max-w-[300px] mx-auto  grid-cols-3 mb-[40px] gap-[13px] items-center justify-center">
         {data?.map((item) => (
           <HomeCard 
             key={item.id}

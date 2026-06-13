@@ -276,13 +276,12 @@ export default function EducationPage() {
               >
                 <div className="flex flex-col gap-2 px-2">
                   {item.types.map((type) => (
-                    <div
+                        <div
                       key={type.id}
                       onClick={() => handleTypeClick(item, type)}
-                      className={`h-[38.4px] border border-(--main-color)/40 flex justify-center items-center 
-                       bg-(--main-bg-color)
-                      rounded-lg cursor-pointer hover:border hover:border-(--main-color) transition-all 
-                      `}
+                      className="h-[38.4px] border border-(--main-color)/40 flex justify-center items-center 
+                       bg-[linear-gradient(135deg,rgb(0,0,0),#4d4c4c)]
+                      rounded-lg cursor-pointer hover:border hover:border-(--main-color) transition-all"
                     >
                       <p className="text-[#eee] font-medium text-[13px]">{type.name}</p>
                     </div>

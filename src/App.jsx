@@ -15,13 +15,13 @@ export default function App() {
 
   if (showSplash) {
     return (
-      <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#171717] z-[1000]">
-        <img 
-          src="/logo.png" 
-          className="h-[220px] w-full max-w-[450px] object-contain animate-pulse" 
-          alt="Fouady Logo" 
-        />
-      </div>
+<div className="fixed inset-0 flex flex-col items-center justify-center bg-[#171717] z-[1000] px-6">
+  <img 
+    src="/logo3 (2).png" 
+    className="h-[380px] w-auto max-w-[620px] object-contain animate-pulse" 
+    alt="Fouady Logo" 
+  />
+</div>
     );
   }
   
