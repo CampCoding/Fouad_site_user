@@ -2,19 +2,19 @@
 export default function MainLogo() {
   return (
     <div className="mx-auto mt-[45px] mb-5 flex h-[120px] w-[90vw] items-center justify-between rounded-[10px]">
-      <div className="-mt-[10px] flex w-[70%] flex-col items-center justify-center">
+      <div className="-mt-[10px] flex w-[70%] flex-col md:items-start items-center justify-center">
         <h1
-          className="m-0 text-white font-bold text-center text-[22px] font-bold tracking-[0.4px]"
+          className="m-0 text-white font-bold text-center text-[28px]  tracking-[0.4px]"
           
         >
-          FOUADY ACADEMY
+          فؤادي
         </h1>
 
         <h2
-          className="my-1 text-center  text-(--main-color) text-[14px] font-bold tracking-[0.4px]"
+          className="my-1 text-center  text-(--main-color) text-[20px] font-bold tracking-[0.4px]"
           
         >
-          FOR PEDIATRIC CARDIOLOGY
+       لقلب الاطفال
         </h2>
 
         <div
