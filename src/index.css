@@ -42,6 +42,9 @@ body {
   font-family: "Noto Sans Arabic", sans-serif !important;
 }
 
+button {
+  cursor: pointer !important;
+}
 .customeHeaderClass {
   display: flex;
   justify-content: center;

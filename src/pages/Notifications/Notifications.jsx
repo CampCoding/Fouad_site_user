@@ -18,15 +18,43 @@ export default function Notifications() {
     }
   }, [activeTab]);
 
+  const handleNotificationClick = async (item) => {
+    // لو فيه PDF نزله
+    if (item.pdfUrl) {
+      try {
+        const response = await fetch(item.pdfUrl);
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = `${item.title || 'report'}.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.URL.revokeObjectURL(blobUrl);
+      } catch (error) {
+        // fallback لو التحميل المباشر منعه CORS
+        window.open(item.pdfUrl, '_blank');
+      }
+
+      return;
+    }
+
+    // لو مفيش PDF وروت موجود
+    if (item.route) {
+      navigate(item.route);
+    }
+  };
+
   return (
     <div className="py-10 mx-auto">
-      {/* Page Title Card */}
       <div className="card mb-4 cursor-pointer" onClick={() => setActiveTab(0)}>
         <Bell size={40} className="text-(--main-color)" />
         <p className="font-bold text-[17px] text-[#eee]">التنبيهات</p>
       </div>
 
-      {/* Tabs Grid */}
       <div className={`grid grid-cols-3 gap-3 px-2 mb-6 transition-all ${activeTab !== 0 ? "border-b border-(--main-color) pb-4" : ""}`}>
         {PROFILE_DATA.map((item) => (
           <HomeCard
@@ -41,13 +69,12 @@ export default function Notifications() {
         ))}
       </div>
 
-      {/* Notifications List */}
       <div className="flex flex-col gap-1 px-1">
         {filteredData.length > 0 ? (
           filteredData.map((item) => (
             <div
               key={item.id}
-              onClick={() => item.route && navigate(item.route)}
+              onClick={() => handleNotificationClick(item)}
               className="flex w-full gap-3 items-center pb-3 border-b border-white/5 cursor-pointer hover:bg-white/5 transition-colors p-2 rounded-lg"
             >
               <div className="w-[65px] h-[65px] flex-shrink-0">
@@ -60,7 +87,7 @@ export default function Notifications() {
                 />
               </div>
               <div className="flex-1 flex flex-col justify-between h-[65px] p-2 bg-[#171717] border border-white/5 rounded-lg">
-                <p className="text-white font-bold text-[13px] text-right line-clamp-2">{item.title}</p>
+                <p className="text-white font-bold text-[15px] text-right line-clamp-2">{item.title}</p>
                 <p className="text-(--main-color) text-[10px] text-left">15/2/2025</p>
               </div>
             </div>

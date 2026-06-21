@@ -19,6 +19,11 @@ import Profile from '../pages/Profile/Profile';
 import Notifications from '../pages/Notifications/Notifications';
 import PinPage from '../pages/PinPage/PinPage';
 import SharePage from '../pages/SharePage/SharePage'
+import Instructions from "../pages/Instructions/Instructions";
+import Rating from "../pages/Rating/Rating";
+import Offers from "../pages/Offers/Offers";
+import Consultations from "../pages/Consultations/Consultations";
+import News from "../pages/News/News";
 
 export const routesData = [
   {
@@ -136,15 +141,47 @@ export const routesData = [
     element: <Notifications />,
   },
   {
-    id:20,
-        name: "PinPage",
+    id: 20,
+    name: "PinPage",
     path: "/pin",
     element: <PinPage />,
   },
   {
-    id:21,
-        name: "SharePage",
+    id: 21,
+    name: "SharePage",
     path: "/share",
     element: <SharePage />,
-  }
+  },
+
+  {
+    id: 22,
+    name: "Instructions",
+    path: "/instructions",
+    element: <Instructions />,
+  },
+
+  {
+    id: 23,
+    name: "Rating",
+    path: "/rating",
+    element: <Rating />,
+  },
+  {
+    id: 24,
+    name: "Offers",
+    path: "/offers",
+    element: <Offers />,
+  },
+  {
+    id: 25,
+    name: "Consultations",
+    path: "/consultations",
+    element: <Consultations />,
+  },
+  {
+    id: 26,
+    name: "News",
+    path: "/news",
+    element: <News />,
+  },
 ]

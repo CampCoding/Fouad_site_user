@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { FaFacebook, FaLinkedin, FaTelegram, FaWhatsapp, FaInstagram, FaYoutube, FaTiktok ,FaGoogle } from 'react-icons/fa'
+import { FaFacebook, FaLinkedin, FaTelegram, FaWhatsapp, FaInstagram, FaYoutube, FaTiktok, FaGoogle } from 'react-icons/fa'
 import CustomInput from '../../Common/CustomInput'
 import { Link } from 'react-router'
 
@@ -29,11 +29,11 @@ export default function ContactUsPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(5); // ستيت للنجوم المحددة
 
-  const { 
-    register, 
-    handleSubmit, 
+  const {
+    register,
+    handleSubmit,
     reset,
-    formState: { errors } 
+    formState: { errors }
   } = useForm({
     resolver: zodResolver(reviewSchema),
     defaultValues: {
@@ -44,15 +44,15 @@ export default function ContactUsPage() {
   const onSubmitReview = (data) => {
     const finalData = { ...data, stars: rating };
     console.log("Review Data Submitted:", finalData);
-    
+
     reset();
     setIsOpen(false);
   };
 
   return (
     <div className="max-w-[400px] mx-auto px-4 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500 relative">
-      
-    
+
+
       <div className="card mb-4 mt-10">
         <div className="p-1 rounded-lg border border-[#232323]">
           <Phone size={30} className="text-(--main-color)" />
@@ -62,7 +62,7 @@ export default function ContactUsPage() {
         </p>
       </div>
 
-     
+
       <div className="grid grid-cols-3 gap-3">
         {contactMethods.map((method) => (
           <a
@@ -79,12 +79,12 @@ export default function ContactUsPage() {
       </div>
 
 
-      <button className="auth_btn w-full! mx-auto! rounded-md! mt-10 py-3.5 font-bold text-sm shadow-[0_0_20px_rgba(var(--main-bg-rgb),0.15)]">
+      {/* <button className="auth_btn w-full! mx-auto! rounded-md! mt-10 py-3.5 font-bold text-sm shadow-[0_0_20px_rgba(var(--main-bg-rgb),0.15)]">
         راسلنا من خلال البرنامج
-      </button>
+      </button> */}
 
-    
-<div className="flex items-center justify-between gap-3 mt-6 w-full px-1">
+
+      {/* <div className="flex items-center justify-between gap-3 mt-6 w-full px-1">
   
   <button 
     onClick={() => setIsOpen(true)}
@@ -105,19 +105,19 @@ export default function ContactUsPage() {
     <span>قيمنا عبر Google</span>     
   </Link>
 
-</div>
+</div> */}
 
       {/* ---------------------------------------------------- */}
       {/* الـ Modal الخاص بالتقييم */}
       {isOpen && (
         <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-          
+
           <div className="w-full max-w-[360px] bg-[#171717] border border-[#232323] rounded-2xl p-5 shadow-2xl animate-in zoom-in-95 duration-200">
-            
-         
+
+
             <div className="flex items-center justify-between border-b border-[#232323] pb-3 mb-4">
               <h3 className="text-white font-bold text-base">تقييم المنصة عبر Facebook</h3>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="text-gray-400 hover:text-white p-1 rounded-lg transition-colors"
               >
@@ -127,8 +127,8 @@ export default function ContactUsPage() {
 
             {/* الفورم */}
             <form onSubmit={handleSubmit(onSubmitReview)} className="flex flex-col gap-4">
-              
-          
+
+
               <div className="flex flex-col items-center justify-center gap-2 my-2">
                 <p className="text-xs text-gray-400">ما هو تقييمك لنا بالنجوم؟</p>
                 <div className="flex gap-1.5 direction-ltr">
@@ -139,16 +139,16 @@ export default function ContactUsPage() {
                       onClick={() => setRating(star)}
                       className="transition-transform active:scale-95"
                     >
-                      <Star 
-                        size={26} 
-                        className={star <= rating ? "text-[#d49a3e] fill-[#d49a3e]" : "text-gray-600"} 
+                      <Star
+                        size={26}
+                        className={star <= rating ? "text-[#d49a3e] fill-[#d49a3e]" : "text-gray-600"}
                       />
                     </button>
                   ))}
                 </div>
               </div>
 
-             
+
               <div className="text-right">
                 <CustomInput
                   placeholder="اكتب رأيك أو مقترحاتك هنا..."
@@ -157,16 +157,16 @@ export default function ContactUsPage() {
                 />
               </div>
 
-             
+
               <div className="flex gap-3 mt-2">
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="auth_btn flex-1 py-3 font-bold text-xs rounded-md!"
                 >
                   إرسال التقييم
                 </button>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => setIsOpen(false)}
                   className="flex-1 py-3 font-bold text-xs bg-[#232323] text-gray-300 border border-[#333] rounded-md hover:bg-[#2e2e2e] transition-colors"
                 >
@@ -178,8 +178,8 @@ export default function ContactUsPage() {
           </div>
         </div>
       )}
-      
-     
+
+
     </div>
   )
 }

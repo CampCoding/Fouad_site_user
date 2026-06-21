@@ -7,7 +7,7 @@ export default function ReservationConfirmation({ currentStep, setSearchParams, 
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [reservationDone, setReservationDone] = useState(false);
   const navigate = useNavigate();
-  
+
   const location = useLocation();
   const isExternalReservation = location.pathname == "/reservations/external"
 
@@ -33,7 +33,7 @@ export default function ReservationConfirmation({ currentStep, setSearchParams, 
     { label: "المدينة", value: "طنطا" },
     { label: "المستشفي", value: "دار القمة" },
     { label: "التاريخ", value: "2024-05-12" },
-    { label: "خلال مدة", value: ""},
+    { label: "خلال مدة", value: "" },
     { label: "التليفون", value: "01234567890" },
     { label: "اسم الطفل", value: "أحمد محمد" },
     { label: "اسم الأب", value: "محمد علي" },
@@ -41,9 +41,9 @@ export default function ReservationConfirmation({ currentStep, setSearchParams, 
     { label: "السعر", value: "500 ج.م" },
   ];
 
-  const data = useMemo(() =>  {
+  const data = useMemo(() => {
     return isExternalReservation ? externtal_data : internal_data
-  } , [location.pathname])
+  }, [location.pathname])
 
   // Function to go to a specific step
   const goToStep = (stepNum) => {
@@ -79,7 +79,7 @@ export default function ReservationConfirmation({ currentStep, setSearchParams, 
                     <div className={`col-span-1 p-2 border  rounded-lg border-[#232323] text-[12px] text-center bg-transparent text-white flex items-center justify-center`}>
                       {itemLeft.value}
                     </div>
-                    <div className={`col-span-1 p-2  border rounded-lg  border-[#232323] text-white text-[10px] font-bold text-center bg-[#232323]! flex items-center justify-center`}>
+                    <div className={`col-span-1 p-2  border rounded-lg  border-(--main-color) text-white text-[10px] font-bold text-center bg-[#232323]! flex items-center justify-center`}>
                       {itemLeft.label}
                     </div>
 
@@ -88,7 +88,7 @@ export default function ReservationConfirmation({ currentStep, setSearchParams, 
                     <div className={`col-span-1 p-2  rounded-lg border  border-[#232323] text-white text-[12px] text-center bg-transparent flex items-center justify-center`}>
                       {itemRight.value}
                     </div>
-                    <div className={`col-span-1 p-2  border rounded-lg border-[#232323] text-white text-[10px] font-bold text-center bg-[#232323]! flex items-center justify-center 
+                    <div className={`col-span-1 p-2  border rounded-lg border-(--main-color) text-white text-[10px] font-bold text-center bg-[#232323]! flex items-center justify-center 
                   `}>
                       {itemRight.label}
                     </div>
@@ -138,7 +138,7 @@ export default function ReservationConfirmation({ currentStep, setSearchParams, 
                       <div className={`col-span-1 p-2 border  rounded-lg border-[#232323] text-[12px] text-center bg-transparent text-white flex items-center justify-center`}>
                         {itemLeft.value}
                       </div>
-                      <div className={`col-span-1 p-2  border rounded-lg  border-[#232323] text-white text-[10px] font-bold text-center bg-[#232323]! flex items-center justify-center`}>
+                      <div className={`col-span-1 p-2  border rounded-lg  border-(--main-color) text-white text-[10px] font-bold text-center bg-[#232323]! flex items-center justify-center`}>
                         {itemLeft.label}
                       </div>
 
@@ -147,7 +147,7 @@ export default function ReservationConfirmation({ currentStep, setSearchParams, 
                       <div className={`col-span-1 p-2  rounded-lg border  border-[#232323] text-white text-[12px] text-center bg-transparent flex items-center justify-center`}>
                         {itemRight.value}
                       </div>
-                      <div className={`col-span-1 p-2  border rounded-lg border-[#232323] text-white text-[10px] font-bold text-center bg-[#232323]! flex items-center justify-center 
+                      <div className={`col-span-1 p-2  border rounded-lg border-(--main-color) text-white text-[10px] font-bold text-center bg-[#232323]! flex items-center justify-center 
                   `}>
                         {itemRight.label}
                       </div>
@@ -172,7 +172,7 @@ export default function ReservationConfirmation({ currentStep, setSearchParams, 
               </button>
               {showInstructions && (
                 <button
-                  onClick={() => navigate(`/reservations-instruction?svc=${isExternalReservation ? "2" :"1"}`)}
+                  onClick={() => navigate(`/reservations-instruction?svc=${isExternalReservation ? "2" : "1"}`)}
                   className="auth_btn w-full! py-3! font-bold! text-sm shadow-[0_0_15px_rgba(var(--main-bg-rgb),0.2)]"
                 >
                   للتعليمات
