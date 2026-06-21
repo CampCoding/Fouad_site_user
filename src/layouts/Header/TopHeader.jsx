@@ -22,14 +22,14 @@ export default function TopHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const notifications = isReportPage 
+  const notifications = isReportPage
     ? [
-        { id: 1, text: "تم تحديث بيانات التقرير الحالي", time: "منذ دقيقتين" },
-        { id: 2, text: "طلب طباعة جديد للتقرير", time: "منذ ساعة" },
-      ]
+      { id: 1, text: "تم تحديث بيانات التقرير الحالي", time: "منذ دقيقتين" },
+      { id: 2, text: "طلب طباعة جديد للتقرير", time: "منذ ساعة" },
+    ]
     : [
-        { id: 1, text: "تنبيه عام: النظام محدث", time: "منذ يوم" },
-      ];
+      { id: 1, text: "تنبيه عام: النظام محدث", time: "منذ يوم" },
+    ];
 
   const handleBellClick = () => {
     if (selectedRecord) {
@@ -42,9 +42,9 @@ export default function TopHeader() {
   return (
     <div
       style={{
-        direction: "ltr",
+        direction: "rtl",
       }}
-      className='grid bg-(--dark_gray-4) z-60 fixed left-0 right-0 top-0 grid-cols-6 gap-2 items-center justify-center py-4 border-b-2 border-(--main-color)'>
+      className='grid bg-(--dark_gray-4) z-60 fixed left-0 right-0 bottom-0 grid-cols-6 gap-2 items-center justify-center py-4 border-t-2 border-(--main-color)'>
       <Link to="/">
         <House className='text-(--main-color) text-center mx-auto w-[26px] h-[26px]' />
       </Link>
@@ -55,17 +55,17 @@ export default function TopHeader() {
         <UserRoundCog className='text-(--main-color) text-center mx-auto w-[26px] h-[26px]' />
       </Link>
       <Link to="/share">
-      <Share2 className='text-(--main-color) text-center mx-auto w-[26px] h-[26px]' />
+        <Share2 className='text-(--main-color) text-center mx-auto w-[26px] h-[26px]' />
       </Link>
-      
+
       <Link to="/pin">
         <Pin className='text-(--main-color) text-center mx-auto w-[26px] h-[26px]' />
       </Link>
-      
+
       <div className="relative" ref={dropdownRef}>
-        <Bell 
+        <Bell
           onClick={handleBellClick}
-          className='text-(--main-color) text-center mx-auto w-[26px] h-[26px] cursor-pointer hover:scale-110 transition-transform' 
+          className='text-(--main-color) text-center mx-auto w-[26px] h-[26px] cursor-pointer hover:scale-110 transition-transform'
         />
         {showNotifications && (
           <div className="absolute top-[45px] right-0 w-[250px] bg-[#171717] border-2 border-(--main-color) rounded-[8px] shadow-2xl z-70 animate-in slide-in-from-top-2 duration-200" style={{ direction: 'rtl' }}>

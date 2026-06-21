@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-export default function CustomSelect({ 
-  options = [], 
-  value, 
-  onChange, 
-  placeholder, 
-  error, 
-  className = "" 
+export default function CustomSelect({
+  options = [],
+  value,
+  onChange,
+  placeholder,
+  error,
+  className = "",
+  selectClassName = ""
+
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
@@ -27,9 +29,8 @@ export default function CustomSelect({
     <div ref={containerRef} className={`relative w-full ${className}`}>
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center justify-between h-[38.4px] bg-[#171717] border rounded-[4px] cursor-pointer group transition-all ${
-          error ? 'border-red-500' : 'border-(--main-color)/30 focus-within:border-(--main-color)'
-        }`}
+        className={`${selectClassName} flex items-center justify-between h-[38.4px] bg-[#171717] border rounded-[4px] cursor-pointer group transition-all ${error ? 'border-red-500' : 'border-(--main-color)/30 focus-within:border-(--main-color)'
+          }`}
       >
         {/* Selected value or placeholder */}
         <div className="flex-1 px-3 text-start truncate flex items-center gap-2">
@@ -45,11 +46,11 @@ export default function CustomSelect({
         </div>
 
         <div className="h-full aspect-square flex items-center justify-center">
-          <img 
-            src="https://res.cloudinary.com/dbz6ebekj/image/upload/v1742382414/icons_fouady_6_kyj440.png" 
-            alt="chevron down" 
-            className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
-          />        
+          <img
+            src="https://res.cloudinary.com/dbz6ebekj/image/upload/v1742382414/icons_fouady_6_kyj440.png"
+            alt="chevron down"
+            className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          />
         </div>
       </div>
 
@@ -67,9 +68,8 @@ export default function CustomSelect({
                   onChange(option.value);
                   setIsOpen(false);
                 }}
-                className={`px-4 py-2 text-sm cursor-pointer hover:bg-(--main-color)/10 transition-colors flex items-center gap-3 ${
-                  value === option.value ? 'bg-(--main-color)/20 text-white' : 'text-(--main-color)'
-                }`}
+                className={`px-4 py-2 text-sm cursor-pointer hover:bg-(--main-color)/10 transition-colors flex items-center gap-3 ${value === option.value ? 'bg-(--main-color)/20 text-white' : 'text-(--main-color)'
+                  }`}
               >
                 {option.img && (
                   <img src={option.img} alt={option.label} className="w-10 h-10" />

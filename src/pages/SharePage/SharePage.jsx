@@ -2,13 +2,7 @@ import { Share2 } from 'lucide-react'
 import React from 'react'
 
 export const SHARE_DATA = [
-  {
-    id: 1,
-    title: "دعوة للإنضمام عبر رسالة نصية للهاتف",
-    placeholder: "اكتب الرقم",
-    type: "tel",
-    btnText: "إرسل",
-  },
+
   {
     id: 2,
     title: "دعوة للإنضمام عبر واتس آب",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ReservationChooseService from './ReservationChooseService';
 import ReservationPatientInfo from './ReservationPatientInfo';
 import ReservationPayment from './ReservationPayment';
@@ -6,76 +6,189 @@ import ReservationConfirmation from './ReservationConfirmation';
 import ReservationExternalService from './ReservationExternalService';
 import ReservationExternalPatient from './ReservationExternalPatient';
 import ReservationOnlineService from './ReservationOnlineService';
-import { useParams, useSearchParams, useNavigate, useLocation } from 'react-router';
+import ReservationAppointment from './ReservationAppointment';
+import { useParams, useSearchParams, useNavigate } from 'react-router';
 import { ChevronRight } from 'lucide-react';
 
+// ✨ الفلو للداخلي والخارجي (5 ستيبس)
+const FULL_FLOW = ['service', 'appointment', 'patient', 'payment', 'confirmation'];
 
+// ✨ الفلو للأونلاين (4 ستيبس - فيه الموعد جوه الخدمة)
+const ONLINE_FLOW = ['service', 'patient', 'payment', 'confirmation'];
 
-
-const steps = [
-  {
-    id: 1,
-    title: "الخدمة",
-  },
-  {
-    id: 2,
-    title: "المريض",
-  },
-  {
-    id: 3,
-    title: "الدفع"
-  },
-  {
-    id: 4,
-    title: "التأكيد"
-  }
-]
+const STEPS_TITLES = {
+  service: "الخدمة",
+  appointment: "الموعد",
+  patient: "المريض",
+  payment: "الدفع",
+  confirmation: "التأكيد",
+};
 
 export default function Reservations() {
   const { type } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  // Derive currentStep and selectedServiceId from URL search parameters
-  const currentStep = Number(searchParams.get('step')) || 1;
-  const selectedServiceId = Number(searchParams.get('svc')) || null;
 
   const isExternal = type === 'external';
   const isOnline = type === 'online';
 
-  // Function to handle navigation to a specific step
-  const goToStep = (stepNum) => {
+  // ✨ اختار الفلو المناسب
+  const currentFlow = isOnline ? ONLINE_FLOW : FULL_FLOW;
+
+  const currentSlug = searchParams.get('s') || currentFlow[0];
+  const currentStepIndex = currentFlow.indexOf(currentSlug);
+  const currentStepNumber = currentStepIndex + 1;
+  const selectedServiceId = Number(searchParams.get('svc')) || null;
+
+  // ✨ ============= States محفوظة في الـ Parent =============
+
+  // ستيب الخدمة (الداخلي): sub-step + بيانات
+  const [serviceSubStep, setServiceSubStep] = useState(1);
+  const [internalServiceDetails, setInternalServiceDetails] = useState({
+    service: '',
+    type: '',
+    branch: ''
+  });
+
+  // ستيب الموعد (الداخلي والخارجي)
+  const [appointmentData, setAppointmentData] = useState({
+    doctor: '',
+    selectedDateId: 1,
+    selectedTime: null,
+  });
+
+  // بيانات الخدمة الخارجية
+  const [externalServiceDetails, setExternalServiceDetails] = useState({
+    service: '',
+    type: '',
+    governorate: '',
+    city: '',
+    hospital: ''
+  });
+
+  // بيانات الخدمة الأونلاين
+  const [onlineSubStep, setOnlineSubStep] = useState(1);
+  const [onlineServiceDetails, setOnlineServiceDetails] = useState({
+    service: '',
+    type: '',
+    governorate: '',
+    city: '',
+    hospital: ''
+  });
+  const [onlineDoctorIndex, setOnlineDoctorIndex] = useState(0);
+  const [onlineSelectedDate, setOnlineSelectedDate] = useState(1);
+  const [onlineSelectedTime, setOnlineSelectedTime] = useState(null);
+
+  // بيانات المريض (الداخلي)
+  const [patientInfo, setPatientInfo] = useState({
+    childName: '',
+    fatherName: '',
+    motherName: '',
+    phone: '',
+    age: '',
+    referringDoctor: '',
+  });
+
+  // بيانات المريض (الخارجي/الأونلاين)
+  const [externalPatientInfo, setExternalPatientInfo] = useState({
+    childName: '',
+    fatherName: '',
+    motherName: '',
+    phone: '',
+    age: '',
+    referringDoctor: '',
+  });
+
+  // بيانات الدفع
+  const [paymentData, setPaymentData] = useState({
+    selectedMethod: null,
+    price: '',
+    hasCoupon: false,
+    confirmCoupon: false,
+    couponCode: '',
+  });
+
+  // ✨ ============= نهاية الـ States =============
+
+  const goToStep = (slug) => {
     const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('step', String(stepNum));
+    if (slug === currentFlow[0]) {
+      newSearchParams.delete('s');
+    } else {
+      newSearchParams.set('s', slug);
+    }
     setSearchParams(newSearchParams);
   };
 
-  // Function to handle selecting a service type (used by ReservationChooseService)
-  const handleSelectServiceType = (serviceId) => {
-    if (serviceId === 2) { // External
-      navigate(`/reservations/external?step=1&svc=${serviceId}`);
-    } else if (serviceId === 3) { // Online
-      navigate(`/reservations/online?step=1&svc=${serviceId}`);
-    } else if (serviceId === 1) { // Internal
-      const newSearchParams = new URLSearchParams();
-      newSearchParams.set('step', '2'); // Go to patient info step
-      newSearchParams.set('svc', String(serviceId));
-      setSearchParams(newSearchParams);
+  const goToNextStep = () => {
+    const nextIndex = currentStepIndex + 1;
+    if (nextIndex < currentFlow.length) {
+      goToStep(currentFlow[nextIndex]);
     }
   };
 
-  const handleBack = () => {
-    if (currentStep > 1) {
-      navigate(-1); // Go back one step in browser history
-    } else if (isExternal || isOnline) {
-      navigate('/reservations'); // Go back to main service selection if on step 1 of external/online
-    } else {
-      // If on step 1 of main reservations, no more steps back within this flow.
-      // Could navigate to a global home page if desired, but for now, do nothing.
+  const handleSelectServiceType = (serviceId) => {
+    if (serviceId === 2) {
+      navigate(`/reservations/external?svc=${serviceId}`);
+    } else if (serviceId === 3) {
+      navigate(`/reservations/online?svc=${serviceId}`);
+    } else if (serviceId === 1) {
+      const newSearchParams = new URLSearchParams();
+      newSearchParams.set('svc', String(serviceId));
+      setSearchParams(newSearchParams);
+      setServiceSubStep(2); // ينقل للـ sub-step بتاع بيانات الخدمة
     }
   };
- 
+
+  // ✨ زر العودة - يشتغل في كل الحالات
+  const handleBack = () => {
+    // لو في sub-step داخل ستيب الخدمة (الداخلي)
+    if (currentSlug === 'service' && !isExternal && !isOnline && serviceSubStep > 1) {
+      setServiceSubStep(serviceSubStep - 1);
+      // لو رجع للـ sub-step الأول، شيل svc
+      if (serviceSubStep === 2) {
+        const newSearchParams = new URLSearchParams(searchParams);
+        newSearchParams.delete('svc');
+        setSearchParams(newSearchParams);
+      }
+      return;
+    }
+
+    // لو في الأونلاين subStep > 1
+    if (currentSlug === 'service' && isOnline && onlineSubStep > 1) {
+      setOnlineSubStep(onlineSubStep - 1);
+      return;
+    }
+
+    // لو في ستيب غير الأول
+    if (currentStepIndex > 0) {
+      goToStep(currentFlow[currentStepIndex - 1]);
+      return;
+    }
+
+    // لو في external/online وفي أول ستيب → ارجع لاختيار النوع
+    if (isExternal || isOnline) {
+      navigate('/reservations');
+      return;
+    }
+
+    // لو في الداخلي وفي أول ستيب وفي svc → شيله ارجع لاختيار النوع
+    if (selectedServiceId) {
+      const newSearchParams = new URLSearchParams();
+      setSearchParams(newSearchParams);
+      setServiceSubStep(1);
+      return;
+    }
+  };
+
+  // ✨ هل نعرض زر العودة؟
+  const showBackButton =
+    currentStepIndex > 0 ||
+    isExternal ||
+    isOnline ||
+    selectedServiceId ||
+    (currentSlug === 'service' && serviceSubStep > 1);
+
   return (
     <div className="pb-20">
       <div className={`card mt-10 mb-6`}>
@@ -91,68 +204,127 @@ export default function Reservations() {
         </p>
       </div>
 
-      {/* Back Button (if needed, can be integrated into a common header component) */}
-      {(currentStep > 1 || isExternal || isOnline) && (
-        <div className="border h-[38.4px] mb-3 w-full flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px] relative cursor-pointer" onClick={handleBack}>
+      {/* ✨ Back Button - يظهر دايمًا */}
+      {showBackButton && (
+        <div
+          className="border h-[38.4px] mb-3 w-full flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px] relative cursor-pointer hover:bg-(--main-color)/5 transition-colors"
+          onClick={handleBack}
+        >
           <ChevronRight className="absolute right-3 text-(--main-color)" size={20} />
           <p className='text-white text-center font-bold text-[14px]'>العودة</p>
         </div>
       )}
 
-      {/* Stepper Header */}
-      <div className='grid grid-cols-4 mt-3 gap-2 sticky top-20 z-10'>
-        {steps.map((step) => (
-          <div
-            key={step.id}
-            onClick={() => goToStep(step.id)} // Update step on click
-            className={`col-span-1 flex flex-col gap-1 rounded-[7px] bg-[linear-gradient(90deg,#242424,#404040)] px-2 py-2 font-bold items-center justify-center shadow-sm transition-all duration-500 ${step.id > currentStep ? 'opacity-50 pointer-events-none' : 'opacity-100'} ${step.id === currentStep ? 'border border-(--main-color)' : ''}`}
-          >
-            <div className={`w-[30px] h-[30px] border-3 rounded-full flex justify-center items-center
-              ${step.id === currentStep ? 'text-(--main-color) border-(--main-color)' : 'text-gray-400 border-gray-400'}
-            `}>
-              {step?.id}
+      {/* ✨ Stepper Header - ديناميكي حسب الفلو */}
+      <div
+        className='grid mt-3 gap-2 sticky top-20 z-10'
+        style={{ gridTemplateColumns: `repeat(${currentFlow.length}, minmax(0, 1fr))` }}
+      >
+        {currentFlow.map((slug, idx) => {
+          const stepNum = idx + 1;
+          return (
+            <div
+              key={slug}
+              onClick={() => goToStep(slug)}
+              className={`col-span-1 flex flex-col gap-1 rounded-[7px] bg-[linear-gradient(90deg,#242424,#404040)] px-1 py-2 font-bold items-center justify-center shadow-sm transition-all duration-500 ${stepNum > currentStepNumber ? 'opacity-50 pointer-events-none' : 'opacity-100'} ${slug === currentSlug ? 'border border-(--main-color)' : ''}`}
+            >
+              <div className={`w-[28px] h-[28px] border-[3px] rounded-full flex justify-center items-center text-[12px]
+                ${slug === currentSlug ? 'text-(--main-color) border-(--main-color)' : 'text-gray-400 border-gray-400'}
+              `}>
+                {stepNum}
+              </div>
+              <p className={`text-[11px] mt-2 text-center font-bold ${slug === currentSlug ? 'text-white' : 'text-gray-400'}`}>
+                {STEPS_TITLES[slug]}
+              </p>
             </div>
-            <p className={`text-[14px] mt-3 text-center font-bold ${step.id === currentStep ? 'text-white' : 'text-gray-400'}`}>
-              {step.title}
-            </p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Step Content */}
       <div className="mt-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-        {currentStep === 1 && (
+
+        {/* ستيب 1: الخدمة */}
+        {currentSlug === 'service' && (
           <div className='flex flex-col'>
             {isExternal ? (
-              <ReservationExternalService currentStep={currentStep} setSearchParams={setSearchParams} />
+              <ReservationExternalService
+                goToNextStep={goToNextStep}
+                details={externalServiceDetails}
+                setDetails={setExternalServiceDetails}
+              />
             ) : isOnline ? (
-              <ReservationOnlineService currentStep={currentStep} setSearchParams={setSearchParams} />
+              <ReservationOnlineService
+                goToNextStep={goToNextStep}
+                subStep={onlineSubStep}
+                setSubStep={setOnlineSubStep}
+                details={onlineServiceDetails}
+                setDetails={setOnlineServiceDetails}
+                currentDoctorIndex={onlineDoctorIndex}
+                setCurrentDoctorIndex={setOnlineDoctorIndex}
+                selectedDate={onlineSelectedDate}
+                setSelectedDate={setOnlineSelectedDate}
+                selectedTime={onlineSelectedTime}
+                setSelectedTime={setOnlineSelectedTime}
+              />
             ) : (
-              <ReservationChooseService 
-                selectedServiceId={selectedServiceId} 
-                currentStep={currentStep}
-                setSearchParams={setSearchParams}
+              <ReservationChooseService
+                selectedServiceId={selectedServiceId}
                 handleSelectServiceType={handleSelectServiceType}
+                goToNextStep={goToNextStep}
+                subStep={serviceSubStep}
+                setSubStep={setServiceSubStep}
+                details={internalServiceDetails}
+                setDetails={setInternalServiceDetails}
               />
             )}
           </div>
         )}
 
-        {currentStep === 2 && (
+        {/* ✨ ستيب 2: الموعد (للداخلي والخارجي بس) */}
+        {currentSlug === 'appointment' && !isOnline && (
+          <ReservationAppointment
+            goToNextStep={goToNextStep}
+            appointmentData={appointmentData}
+            setAppointmentData={setAppointmentData}
+          />
+        )}
+
+        {/* ستيب: المريض */}
+        {currentSlug === 'patient' && (
           (isExternal || isOnline) ? (
-            <ReservationExternalPatient currentStep={currentStep} setSearchParams={setSearchParams} />
-          ) : ( // Default to internal patient info if no type specified
-            <ReservationPatientInfo currentStep={currentStep} setSearchParams={setSearchParams}/>
+            <ReservationExternalPatient
+              goToNextStep={goToNextStep}
+              patientInfo={externalPatientInfo}
+              setPatientInfo={setExternalPatientInfo}
+            />
+          ) : (
+            <ReservationPatientInfo
+              goToNextStep={goToNextStep}
+              patientInfo={patientInfo}
+              setPatientInfo={setPatientInfo}
+            />
           )
         )}
 
-        {currentStep === 3 && (
-          <ReservationPayment currentStep={currentStep} setSearchParams={setSearchParams} selectedServiceId={selectedServiceId} showInstructions={!isOnline} />
-        )}
-        {currentStep === 4 && (
-          <ReservationConfirmation currentStep={currentStep} setSearchParams={setSearchParams} showInstructions={!isOnline} />
+        {/* ستيب: الدفع */}
+        {currentSlug === 'payment' && (
+          <ReservationPayment
+            goToNextStep={goToNextStep}
+            selectedServiceId={selectedServiceId}
+            showInstructions={!isOnline}
+            paymentData={paymentData}
+            setPaymentData={setPaymentData}
+          />
         )}
 
+        {/* ستيب: التأكيد */}
+        {currentSlug === 'confirmation' && (
+          <ReservationConfirmation
+            goToStep={goToStep}
+            showInstructions={!isOnline}
+          />
+        )}
 
       </div>
     </div>

@@ -2,90 +2,65 @@ import React, { useState } from 'react'
 import CustomSelect from '../../Common/CustomSelect'
 import CustomInput from '../../Common/CustomInput'
 import { MdOutlineKeyboardDoubleArrowLeft } from 'react-icons/md';
-import { X, Upload, CheckCircle2, Copy, Wallet, ArrowLeftRight, Info, UploadCloud } from 'lucide-react';
-
-
+import { X, CheckCircle2, Copy, ArrowLeftRight, Info, UploadCloud } from 'lucide-react';
 
 const USER_BALANCE = 500;
 
-export default function ReservationPayment({setSearchParams,   currentStep }) {
-  const [hasCoupon, setHasCoupon] = useState(false);
-  const [confirmCoupon, setConfirmCoupon] = useState(false);
-  const [couponCode, setCouponCode] = useState('');
-  const [price, setPrice] = useState('');
-  const [selectedMethod, setSelectedMethod] = useState(null);
+export default function ReservationPayment({ goToNextStep, selectedServiceId, paymentData, setPaymentData }) {
+
+  // الـ states المؤقتة (Modals والـ file)
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isTransferOpen, setIsTransferOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
 
+  const { selectedMethod, price, hasCoupon, confirmCoupon, couponCode } = paymentData;
+
   const paymentOptions = [
-    { value: 'balance', label: 'الدفع من خلال رصيدك في البرنامج', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889968/134_jj9les.png" },
-    { value: 'cash', label: 'الدفع نقدا من خلال الفرع يوم الفحص', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889965/3_jc68er.png" },
-    { value: 'cards', label: 'الدفع من بطاقة الالكترونية', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889967/133_kg8ipo.png" },
-    { value: 'instapay', label: 'الدفع من إنستاباي', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889967/131_hdrunk.png" },
-    { value: 'vodafone', label: 'الدفع من فودافون كاش', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889967/132_gavuhf.png" },
-    { value: 'insurance', label: 'على نفقة التأمين الصحي', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889965/4_i15hno.png" },
-    { value: 'doctors', label: 'تعاقد نقابة الأطباء', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889966/5_tjg6ij.png" },
-    { value: 'engineers', label: 'تعاقد نقابة المهندسين', img: "https://res.cloudinary.com/dbz6ebekj/image/upload/v1756889966/6_qerhux.png" },
+    { value: 'balance', label: 'الدفع من خلال رصيدك في البرنامج', img: "/images/159.png" },
+    { value: 'cash', label: 'الدفع نقدا من خلال الفرع يوم الفحص', img: "/images/152.png" },
+    { value: 'cards', label: 'الدفع من بطاقة الالكترونية', img: "/images/158.png" },
+    { value: 'instapay', label: 'الدفع من إنستاباي', img: "/images/156.png" },
+    { value: 'vodafone', label: 'الدفع من فودافون كاش', img: "/images/157.png" },
+    { value: 'insurance', label: 'على نفقة التأمين الصحي', img: "/images/153.png" },
+    { value: 'doctors', label: 'تعاقد نقابة الأطباء', img: "/images/154.png" },
+    { value: 'engineers', label: 'تعاقد نقابة المهندسين', img: "/images/155.png" },
   ];
 
+  // ✨ المسح يبقى بس لو الطريقة اتغيرت فعلًا
   const handleMethodChange = (method) => {
-    setSelectedMethod(method);
-    // Reset data when method changes
-    setHasCoupon(false);
-    setConfirmCoupon(false);
-    setCouponCode('');
-    setPrice('');
-  };
+    // لو نفس الطريقة، متعملش حاجة
+    if (method === selectedMethod) return;
 
-  // Function to advance to the next step
-  const handleNextStep = () => {
-    setSearchParams(prev => {
-      prev.set('step', String(currentStep + 1));
-      return prev;
+    setPaymentData({
+      ...paymentData,
+      selectedMethod: method,
+      hasCoupon: false,
+      confirmCoupon: false,
+      couponCode: '',
+      price: '',
     });
   };
 
-  const selectedOption = paymentOptions.find(opt => opt.value === selectedMethod);
   const isSufficient = Number(price) <= USER_BALANCE;
 
   return (
     <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Step Header */}
       <div className="border h-[40px] mb-4 flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px]">
         <p className='text-white text-center font-bold'>إملأ بيانات الدفع </p>
       </div>
 
       <div className='flex flex-col gap-4'>
-        {/* Payment Method */}
+        {/* ✨ السيليكت يفضل ظاهر دايمًا - مفيش استبدال بـ div */}
         <div className="flex flex-col gap-1">
-          {!selectedMethod ? (
-            <CustomSelect
-              placeholder={"اختر طريقة الدفع"}
-              options={paymentOptions}
-              value={selectedMethod}
-              onChange={handleMethodChange}
-            />
-          ) : (
-            <div 
-              onClick={() => handleMethodChange(null)}
-              className="flex items-center gap-4 p-2 bg-[#171717] border border-[#232323] rounded-[4px] cursor-pointer hover:border-(--main-color) transition-all group"
-            >
-              <div className="h-[28px] w-[35px] flex items-center justify-center bg-[#232323] rounded-[2px]">
-                <img 
-                  src={selectedOption?.img} 
-                  alt={selectedOption?.label} 
-                  className="h-[18px] object-contain"
-                />
-              </div>
-              <p className="text-white text-[13px] font-medium flex-1 text-right">
-                {selectedOption?.label}
-              </p>
-            </div>
-          )}
+          <CustomSelect
+            placeholder={"اختر طريقة الدفع"}
+            options={paymentOptions}
+            value={selectedMethod}
+            onChange={handleMethodChange}
+            selectClassName='h-[50px]!'
+          />
         </div>
 
-        {/* Only show Service Price Row if not insurance/syndicate */}
         {selectedMethod !== 'insurance' && selectedMethod !== 'doctors' && selectedMethod !== 'engineers' && (
           <div className="grid grid-cols-[1fr_0.5fr_0.7fr] gap-2 items-center">
             <div className="flex flex-col gap-1">
@@ -93,30 +68,29 @@ export default function ReservationPayment({setSearchParams,   currentStep }) {
                 سعر الخدمة
               </div>
             </div>
-            
+
             <div className="flex flex-col gap-1">
-              <CustomInput 
+              <CustomInput
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                className="border-[#232323]! rounded-[4px]!" 
-                inputClassName="placeholder:text-white text-white text-center" 
-                placeholder={"السعر"} 
+                onChange={(e) => setPaymentData({ ...paymentData, price: e.target.value })}
+                className="border-[#232323]! rounded-[4px]!"
+                inputClassName="placeholder:text-white text-white text-center"
+                placeholder={"السعر"}
               />
             </div>
 
             <div className="flex flex-col gap-1">
               <button
-                onClick={() => setHasCoupon(prev => !prev)}
+                onClick={() => setPaymentData({ ...paymentData, hasCoupon: !hasCoupon })}
                 className={`bg-[#171717] rounded-[4px] text-[11px] h-[38.4px] text-white transition-all 
                   ${hasCoupon ? 'border border-(--main-bg-color) shadow-[0_0_10px_rgba(var(--main-bg-rgb),0.3)]' : 'border border-[#232323]'}`}>
-                  لديك كود خصم؟
+                لديك كود خصم؟
               </button>
             </div>
           </div>
         )}
       </div>
 
-      {/* Balance Specific UI */}
       {selectedMethod === 'balance' && price && (
         <div className="mt-2 animate-in fade-in zoom-in-95 duration-300">
           {isSufficient ? (
@@ -138,112 +112,101 @@ export default function ReservationPayment({setSearchParams,   currentStep }) {
         </div>
       )}
 
-      {/* Transfer & Upload UI (InstaPay & Vodafone Cash) */}
       {(selectedMethod === 'instapay' || selectedMethod === 'vodafone') && (
         <div className="flex flex-col gap-2 mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
           <div className='grid grid-cols-[10fr_2fr_6fr] gap-2'>
             <div className='bg-[#171717] flex justify-center items-center rounded-[4px] h-[38px] border border-[#232323]'>
               <p className='text-[#a6a6a6] text-center text-[13px]'>اضغط هنا لتحويل مبلغ الحجز</p>
             </div>
-
-            <MdOutlineKeyboardDoubleArrowLeft className='text-[#545454] mx-auto w-[50px] h-[50px]'/>
+            <MdOutlineKeyboardDoubleArrowLeft className='text-[#545454] mx-auto w-[50px] h-[50px]' />
             <button onClick={() => setIsTransferOpen(true)} className="auth_btn">للتحويل</button>
-
           </div>
-
 
           <div className='grid grid-cols-[10fr_2fr_6fr] gap-2'>
             <div className='bg-[#171717] flex justify-center items-center rounded-[4px] h-[38px] border border-[#232323]'>
               <p className='text-[#a6a6a6] text-center text-[13px]'>اضغط هنا لتحميل إيصال التحويل</p>
             </div>
-
-            <MdOutlineKeyboardDoubleArrowLeft className='text-[#545454] mx-auto w-[50px] h-[50px]'/>
+            <MdOutlineKeyboardDoubleArrowLeft className='text-[#545454] mx-auto w-[50px] h-[50px]' />
             <button onClick={() => setIsUploadOpen(true)} className="auth_btn">للتحميل</button>
-
           </div>
-        
         </div>
       )}
 
-      {/* Insurance Documents */}
       {selectedMethod === 'insurance' && (
         <div className="flex flex-col gap-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-           <div className="flex items-center justify-end gap-2 text-white/70 text-[13px]">
-             <span>يرجى تحميل هذه الاوراق بصورة واضحة</span>
-             <Info className="w-4 h-4 text-(--main-color)" />
-           </div>
-           
-           <div className="grid grid-cols-2 gap-3">
-             {[
-               "أصل خطاب التأمين للمركز مختوم وساري",
-               "صورة الصفحة الأولى للشهادة الصحية بالكارنيه",
-               "صورة شهادة ميلاد الطفل",
-               "صورة بطاقة الأب أو الأم"
-             ].map((doc, idx) => (
-               <div key={idx} className="flex items-center justify-between gap-2 bg-[#171717] border border-[#232323] p-3 rounded-[8px] hover:border-(--main-color)/30 transition-all cursor-pointer group" onClick={() => setIsUploadOpen(true)}>
-                 <p className="text-white text-[10px] flex-1 text-right leading-tight">{doc}</p>
-                 <div className="p-2 bg-[#232323] rounded-full group-hover:bg-(--main-color)/10 transition-colors">
-                   <UploadCloud className="w-4 h-4 text-(--main-color)" />
-                 </div>
-               </div>
-             ))}
-           </div>
+          <div className="flex items-center justify-start gap-2 text-white/70 text-[13px]">
+            <Info className="w-4 h-4 text-(--main-color)" />
+            <span>يرجى تحميل هذه الاوراق بصورة واضحة</span>
+          </div>
 
-           <p className="text-white/40 text-[11px] text-center mt-2 leading-relaxed">
-             يتم تسليم هذه الأوراق بنفس الترتيب <br /> من خلال فروعنا يوم الفحص
-           </p>
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              "أصل خطاب التأمين للمركز مختوم وساري",
+              "صورة الصفحة الأولى للشهادة الصحية بالكارنيه",
+              "صورة شهادة ميلاد الطفل",
+              "صورة بطاقة الأب أو الأم"
+            ].map((doc, idx) => (
+              <div key={idx} className="flex items-center justify-between gap-2 bg-[#171717] border border-[#232323] p-3 rounded-[8px] hover:border-(--main-color)/30 transition-all cursor-pointer group" onClick={() => setIsUploadOpen(true)}>
+                <p className="text-white text-[10px] flex-1 text-right leading-tight">{doc}</p>
+                <div className="p-2 bg-[#232323] rounded-full group-hover:bg-(--main-color)/10 transition-colors">
+                  <UploadCloud className="w-4 h-4 text-(--main-color)" />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-white/40 text-[11px] text-center mt-2 leading-relaxed">
+            يتم تسليم هذه الأوراق بنفس الترتيب <br /> من خلال فروعنا يوم الفحص
+          </p>
         </div>
       )}
 
-      {/* Syndicate Documents */}
       {(selectedMethod === 'doctors' || selectedMethod === 'engineers') && (
         <div className="flex flex-col gap-4 mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-           <div className="flex items-center justify-end gap-2 text-white/70 text-[13px]">
-             <span>يرجى تحميل هذه الاوراق بصورة واضحة</span>
-             <Info className="w-4 h-4 text-(--main-color)" />
-           </div>
-           
-           <div className="flex flex-col gap-3">
-             {[
-               "أصل خطاب النقابة للمركز مختوم وساري",
-               "صورة شهادة ميلاد الطفل",
-               "صورة بطاقة الأب أو الأم"
-             ].map((doc, idx) => (
-               <div key={idx} className="flex items-center justify-between gap-3 bg-[#171717] border border-[#232323] p-3 rounded-[8px] hover:border-(--main-color)/30 transition-all cursor-pointer group" onClick={() => setIsUploadOpen(true)}>
-                 <p className="text-white text-[12px] flex-1 text-right">{doc}</p>
-                 <div className="p-2 bg-[#232323] rounded-full group-hover:bg-(--main-color)/10 transition-colors">
-                   <UploadCloud className="w-4 h-4 text-(--main-color)" />
-                 </div>
-               </div>
-             ))}
-           </div>
+          <div className="flex items-center justify-start gap-2 text-white/70 text-[13px]">
+            <Info className="w-4 h-4 text-(--main-color)" />
+            <span>يرجى تحميل هذه الاوراق بصورة واضحة</span>
+          </div>
 
-           <p className="text-white/40 text-[11px] text-center mt-2 leading-relaxed">
-             يتم تسليم هذه الأوراق بنفس الترتيب <br /> من خلال فروعنا يوم الفحص
-           </p>
+          <div className="flex flex-col gap-3">
+            {[
+              "أصل خطاب النقابة للمركز مختوم وساري",
+              "صورة شهادة ميلاد الطفل",
+              "صورة بطاقة الأب أو الأم"
+            ].map((doc, idx) => (
+              <div key={idx} className="flex items-center justify-between gap-3 bg-[#171717] border border-[#232323] p-3 rounded-[8px] hover:border-(--main-color)/30 transition-all cursor-pointer group" onClick={() => setIsUploadOpen(true)}>
+                <p className="text-white text-[12px] flex-1 text-right">{doc}</p>
+                <div className="p-2 bg-[#232323] rounded-full group-hover:bg-(--main-color)/10 transition-colors">
+                  <UploadCloud className="w-4 h-4 text-(--main-color)" />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-white/40 text-[11px] text-center mt-2 leading-relaxed">
+            يتم تسليم هذه الأوراق بنفس الترتيب <br /> من خلال فروعنا يوم الفحص
+          </p>
         </div>
       )}
 
-      {/* Coupon Input Row */}
       {hasCoupon && (
         <div className="grid grid-cols-[1fr_0.3fr] gap-2 items-end mt-2 animate-in fade-in zoom-in-95 duration-300">
           <div className="flex flex-col gap-1">
             <CustomInput
               value={couponCode}
-              onChange={(e) => setCouponCode(e.target.value)}
+              onChange={(e) => setPaymentData({ ...paymentData, couponCode: e.target.value })}
               placeholder="كود الخصم"
               inputClassName="text-white bg-transparent"
             />
           </div>
           <button
-            onClick={() => setConfirmCoupon(true)}
+            onClick={() => setPaymentData({ ...paymentData, confirmCoupon: true })}
             className="bg-[#171717] border border-[#232323] rounded-[4px] text-[12px] h-[38.4px] text-white hover:border-(--main-color) transition-all">
             للتأكيد
           </button>
         </div>
       )}
 
-      {/* Coupon Success Message */}
       {confirmCoupon && (
         <div className="flex flex-col gap-4 mt-4 animate-in slide-in-from-top-2 duration-300">
           <div className="border border-white/80 py-2 rounded-[4px] flex justify-center items-center text-white bg-white/5">
@@ -261,7 +224,7 @@ export default function ReservationPayment({setSearchParams,   currentStep }) {
         </div>
       )}
 
-      <button onClick={handleNextStep} className="auth_btn mt-6 ms-auto! w-min px-10">للإستمرار</button>
+      <button onClick={goToNextStep} className="auth_btn mt-6 ms-auto! w-min px-10">للإستمرار</button>
 
       {/* Upload Modal */}
       {isUploadOpen && (
@@ -274,16 +237,11 @@ export default function ReservationPayment({setSearchParams,   currentStep }) {
               </button>
             </div>
             <div className="p-6 flex flex-col gap-5">
-              <div 
+              <div
                 onClick={() => document.getElementById('file-upload').click()}
                 className="border-2 border-dashed border-(--main-color)/30 rounded-[8px] p-8 flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-(--main-color)/5 transition-all group"
               >
-                <input 
-                  id="file-upload" 
-                  type="file" 
-                  hidden 
-                  onChange={(e) => setSelectedFile(e.target.files[0])}
-                />
+                <input id="file-upload" type="file" hidden onChange={(e) => setSelectedFile(e.target.files[0])} />
                 <div className="w-12 h-12 bg-(--main-color)/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                   <UploadCloud className="w-6 h-6 text-(--main-color)" />
                 </div>
@@ -296,18 +254,12 @@ export default function ReservationPayment({setSearchParams,   currentStep }) {
               </div>
 
               <div className="flex gap-3 justify-end mt-2">
-                <button
-                  onClick={() => setIsUploadOpen(false)}
-                  className="px-5 py-2 text-sm font-medium text-(--main-color) hover:bg-(--main-color)/10 rounded-[4px] transition-colors"
-                >
+                <button onClick={() => setIsUploadOpen(false)} className="px-5 py-2 text-sm font-medium text-(--main-color) hover:bg-(--main-color)/10 rounded-[4px] transition-colors">
                   إلغاء
                 </button>
                 <button
                   disabled={!selectedFile}
-                  onClick={() => {
-                    // Logic to handle upload
-                    setIsUploadOpen(false);
-                  }}
+                  onClick={() => setIsUploadOpen(false)}
                   className={`auth_btn px-6 py-2 flex items-center justify-center min-w-[100px] ${!selectedFile ? 'opacity-50 grayscale' : ''}`}
                 >
                   تحميل الآن
@@ -331,7 +283,7 @@ export default function ReservationPayment({setSearchParams,   currentStep }) {
                 <X className="w-5 h-5 text-(--main-color)" />
               </button>
             </div>
-            
+
             <div className="p-6 flex flex-col gap-6">
               <div className="flex flex-col gap-4">
                 <div className="bg-[#232323] p-4 rounded-[6px] border border-white/5">
@@ -359,10 +311,7 @@ export default function ReservationPayment({setSearchParams,   currentStep }) {
                 </p>
               </div>
 
-              <button
-                onClick={() => setIsTransferOpen(false)}
-                className="auth_btn w-full py-3 text-md font-bold"
-              >
+              <button onClick={() => setIsTransferOpen(false)} className="auth_btn w-full py-3 text-md font-bold">
                 فهمت، شكراً
               </button>
             </div>
@@ -370,6 +319,5 @@ export default function ReservationPayment({setSearchParams,   currentStep }) {
         </div>
       )}
     </div>
-
   )
 }

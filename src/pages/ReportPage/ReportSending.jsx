@@ -4,7 +4,6 @@ import { useParams } from 'react-router';
 export default function ReportSending() {
   const { id } = useParams();
 
-  // Dummy report data (consitent with ReportShipping)
   const reportData = {
     child: "اسم الطفل",
     father: "اسم الأب",
@@ -20,20 +19,23 @@ export default function ReportSending() {
 
   const handleSend = (platform) => {
     console.log(`Sending to ${platform} for report ${id}`);
-    // Simplified open for WhatsApp/Telegram if possible
     if (platform === 'whatsapp') {
       window.open(`https://wa.me/?text=${encodeURIComponent(reportData.link)}`, '_blank');
+    } else if (platform === 'telegram') {
+      window.open(`https://t.me/share/url?url=${encodeURIComponent(reportData.link)}`, '_blank');
+    } else if (platform === 'email') {
+      window.open(`mailto:?subject=تقرير&body=${encodeURIComponent(reportData.link)}`, '_blank');
     } else {
       alert(`جاري الإرسال عبر ${platform}...`);
     }
   };
 
+  // ✨ اتشال "إرسال عبر رسالة نصية"
   const actions = [
-    { id: 1, text: "لإرسال التقرير عبر رسالة نصية للهاتف", btn: "إرسل", platform: "sms" },
-    { id: 2, text: "لإرسال التقرير عبر واتس آب", btn: "إرسل", platform: "whatsapp" },
-    { id: 3, text: "لإرسال التقرير عبر تيليجرام", btn: "إرسل", platform: "telegram" },
-    { id: 4, text: "لإرسال التقرير عبر الإيميل", btn: "إرسل", platform: "email" },
-    { id: 5, text: "إنسخ رابط التقرير", btn: "إنسخ", platform: "copy" },
+    { id: 1, text: "لإرسال التقرير عبر واتس آب", btn: "إرسل", platform: "whatsapp" },
+    { id: 2, text: "لإرسال التقرير عبر تيليجرام", btn: "إرسل", platform: "telegram" },
+    { id: 3, text: "لإرسال التقرير عبر الإيميل", btn: "إرسل", platform: "email" },
+    { id: 4, text: "إنسخ رابط التقرير", btn: "إنسخ", platform: "copy" },
   ];
 
   return (
@@ -68,12 +70,12 @@ export default function ReportSending() {
       </div>
 
       {/* Report Link Section */}
-      <div className="grid grid-cols-4  gap-3 border rounded-[4px] my-3  border-[#292929]">
-         <div className="col-span-1 borer h-[38.4px] flex items-center justify-center  rounded-[4px]">
+      <div className="grid grid-cols-4 gap-3 border rounded-[4px] my-3 border-[#292929]">
+        <div className="col-span-1 h-[38.4px] flex items-center justify-center rounded-[4px]">
           <p className="text-[#eee] text-[11px] font-bold">لينك التقرير</p>
         </div>
-        <div className="col-span-3  h-[38.4px] flex justify-end items-center px-4 rounded-[4px]">
-           <p className="text-(--main-color) text-[11px]  font-bold overflow-hidden whitespace-nowrap overflow-ellipsis">{reportData.link}</p>
+        <div className="col-span-3 h-[38.4px] flex justify-end items-center px-4 rounded-[4px]">
+          <p className="text-(--main-color) text-[11px] font-bold overflow-hidden whitespace-nowrap overflow-ellipsis">{reportData.link}</p>
         </div>
       </div>
 
@@ -81,9 +83,8 @@ export default function ReportSending() {
       <div className="flex flex-col my-10 gap-3">
         {actions.map((action) => (
           <div key={action.id} className="grid grid-cols-4 gap-3">
-             
             <div className="col-span-3 border h-[38.4px] flex items-center px-4 rounded-[4px] border-(--main-color)/30 bg-[linear-gradient(90deg,rgb(0,0,0),#73737320)]">
-               <p className="text-[#eee] text-[11px] font-bold">{action.text}</p>
+              <p className="text-[#eee] text-[11px] font-bold">{action.text}</p>
             </div>
             <button
               onClick={() => action.platform === 'copy' ? handleCopy() : handleSend(action.platform)}

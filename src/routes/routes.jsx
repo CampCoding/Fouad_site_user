@@ -1,16 +1,16 @@
 import React from 'react'
-import { Route, Routes } from 'react-router'
+import { Route, Routes as RouterRoutes } from 'react-router'
 import { routesData } from './routesData'
 import Layout from '../layouts/Layout'
 
-export default function routes() {
+export default function AppRoutes() {
   return (
-    <Routes>
-      <Route path='/' element={<Layout />}>
+    <RouterRoutes>
+      <Route path="/" element={<Layout />}>
         {routesData.map((route) => (
           <Route key={route.id} path={route.path} element={route.element} />
         ))}
       </Route>
-    </Routes>
+    </RouterRoutes>
   )
 }

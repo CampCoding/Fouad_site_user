@@ -1,6 +1,14 @@
 {
-  "name": "Your Website Name",
-  "short_name": "YourName",
+  "id": "/",
+  "name": "Fouady",
+  "short_name": "Fouady",
+  "description": "تجربة المريض",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#000000",
+  "background_color": "#000000",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -20,9 +28,5 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ],
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "display": "standalone",
-  "start_url": "/"
+  ]
 }

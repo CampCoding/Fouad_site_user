@@ -1,19 +1,24 @@
 import TopHeader from './Header/TopHeader'
-import BottomHeader from './Header/BottomHeader'
 import { Outlet, useLocation } from 'react-router'
+import PageTransition from '../components/Common/PageTransition'
 
 export default function Layout() {
-  const {pathname} = useLocation();
-  const routes = [
-    "/report-shipping",
-  ]
+  const { pathname } = useLocation()
+
+  const isFullWidthPage = pathname.startsWith('/report-shipping')
+
   return (
     <div>
-      <TopHeader />
-      <main className={`min-h-screen ${routes.includes(pathname) ?"px-0" :  "px-4"} overflow-y-auto py-10`}>
+      <main
+        className={`min-h-screen overflow-y-auto py-10 ${isFullWidthPage ? 'px-0' : 'px-4'
+          }`}
+      >
         <Outlet />
       </main>
-      <BottomHeader />
+
+      <TopHeader />
+
+      <PageTransition />
     </div>
   )
 }
