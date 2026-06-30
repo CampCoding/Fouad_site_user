@@ -1,187 +1,207 @@
-import HomePage from "../pages/HomePage/HomePage";
+import BeforeVisit from "../components/pages/BeforeVisit/BeforeVisit";
+import ContactUsPage from "../components/pages/ContactUsPage/ContactUsPage";
+import Journey from "../components/pages/Journey/Journey";
+import NotificationPage from "../components/pages/NotificationPage/NotificationPage";
+import ReservationInstructions from "../components/pages/Reservations/ReservationInstructions";
+import Reservations from "../components/pages/Reservations/Reservations";
+import ChangePassword from "../pages/AuthPage/ChangePassword";
 import LoginPage from "../pages/AuthPage/LoginPage";
 import RegisterPage from "../pages/AuthPage/RegisterPage";
-import ChangePassword from "../pages/AuthPage/ChangePassword";
 import ResetPassword from "../pages/AuthPage/ResetPassword";
-import ReportPage from "../pages/ReportPage/ReportPage";
-import ReportShipping from "../pages/ReportPage/ReportShipping";
-import ReportSending from "../pages/ReportPage/ReportSending";
-import NotificationPage from "../components/pages/NotificationPage/NotificationPage";
-import Reservations from "../components/pages/Reservations/Reservations";
-import ReservationInstructions from "../components/pages/Reservations/ReservationInstructions";
-import ContactUsPage from "../components/pages/ContactUsPage/ContactUsPage";
-import EducationPage from '../pages/Education/Education';
-import Branches from '../pages/Branches/Branches';
-import Services from '../pages/Services/Services';
-import Team from '../pages/Team/Team';
-import Settings from '../pages/Settings/Settings';
-import Profile from '../pages/Profile/Profile';
-import Notifications from '../pages/Notifications/Notifications';
-import PinPage from '../pages/PinPage/PinPage';
-import SharePage from '../pages/SharePage/SharePage'
-import Instructions from "../pages/Instructions/Instructions";
-import Rating from "../pages/Rating/Rating";
-import Offers from "../pages/Offers/Offers";
+import Branches from "../pages/Branches/Branches";
 import Consultations from "../pages/Consultations/Consultations";
+import EducationPage from "../pages/Education/Education";
+import HomePage from "../pages/HomePage/HomePage";
+import Instructions from "../pages/Instructions/Instructions";
 import News from "../pages/News/News";
+import Notifications from "../pages/Notifications/Notifications";
+import Offers from "../pages/Offers/Offers";
+import PinPage from "../pages/PinPage/PinPage";
+import Profile from "../pages/Profile/Profile";
+import Rating from "../pages/Rating/Rating";
+import ReportPage from "../pages/ReportPage/ReportPage";
+import ReportSending from "../pages/ReportPage/ReportSending";
+import ReportShipping from "../pages/ReportPage/ReportShipping";
+import Services from "../pages/Services/Services";
+import Settings from "../pages/Settings/Settings";
+import SharePage from "../pages/SharePage/SharePage";
+import Team from "../pages/Team/Team";
+import WhyFouady from "../pages/WhyFouady/WhyFouady";
 
 export const routesData = [
   {
     id: 1,
     name: "Home",
-    path: "/",
+    index: true,
     element: <HomePage />,
   },
   {
     id: 2,
     name: "Login",
-    path: "/login",
+    path: "login",
     element: <LoginPage />,
   },
   {
     id: 3,
     name: "Register",
-    path: "/register",
+    path: "register",
     element: <RegisterPage />,
   },
   {
     id: 4,
     name: "Change Password",
-    path: "/change-password",
+    path: "change-password",
     element: <ChangePassword />,
   },
   {
     id: 5,
     name: "Reset Password",
-    path: "/reset-password",
+    path: "reset-password",
     element: <ResetPassword />,
   },
   {
     id: 6,
     name: "Reports",
-    path: "/reports",
+    path: "reports",
     element: <ReportPage />,
   },
   {
     id: 7,
     name: "Report Shipping",
-    path: "/report-shipping/:id",
+    path: "report-shipping/:id",
     element: <ReportShipping />,
   },
   {
     id: 8,
     name: "Report Sending",
-    path: "/report-sending/:id",
+    path: "report-sending/:id",
     element: <ReportSending />,
   },
   {
     id: 9,
     name: "Report Notification",
-    path: "/notifications/:id",
+    path: "notifications/:id",
     element: <NotificationPage />,
   },
   {
     id: 10,
     name: "Reservations",
-    path: "/reservations/:type?",
+    path: "reservations/:type?",
     element: <Reservations />,
   },
   {
     id: 11,
     name: "Reservations Instruction",
-    path: "/reservations-instruction",
+    path: "reservations-instruction",
     element: <ReservationInstructions />,
   },
   {
     id: 12,
     name: "Contact Us",
-    path: "/contact-us",
+    path: "contact-us",
     element: <ContactUsPage />,
   },
   {
     id: 13,
     name: "Education",
-    path: "/education",
+    path: "education",
     element: <EducationPage />,
   },
   {
     id: 14,
     name: "Branches",
-    path: "/branches",
+    path: "branches",
     element: <Branches />,
   },
   {
     id: 15,
     name: "Services",
-    path: "/services",
+    path: "services",
     element: <Services />,
   },
   {
     id: 16,
     name: "Team",
-    path: "/team",
+    path: "team",
     element: <Team />,
   },
   {
     id: 17,
     name: "Settings",
-    path: "/settings",
+    path: "settings",
     element: <Settings />,
   },
   {
     id: 18,
     name: "Profile",
-    path: "/profile",
+    path: "profile",
     element: <Profile />,
   },
   {
     id: 19,
     name: "Notifications",
-    path: "/notifications",
+    path: "notifications",
     element: <Notifications />,
   },
   {
     id: 20,
     name: "PinPage",
-    path: "/pin",
+    path: "pin",
     element: <PinPage />,
   },
   {
     id: 21,
     name: "SharePage",
-    path: "/share",
+    path: "share",
     element: <SharePage />,
   },
-
   {
     id: 22,
     name: "Instructions",
-    path: "/instructions",
+    path: "instructions",
     element: <Instructions />,
   },
-
   {
     id: 23,
     name: "Rating",
-    path: "/rating",
+    path: "rating",
     element: <Rating />,
   },
   {
     id: 24,
     name: "Offers",
-    path: "/offers",
+    path: "offers",
     element: <Offers />,
   },
   {
     id: 25,
     name: "Consultations",
-    path: "/consultations",
+    path: "consultations",
     element: <Consultations />,
   },
+
   {
     id: 26,
     name: "News",
-    path: "/news",
+    path: "news",
     element: <News />,
   },
-]
+  {
+    id: 27,
+    name: "BeforeVisit",
+    path: "before-visit",
+    element: <BeforeVisit />,
+  },
+  {
+    id: 28,
+    name: "Journey",
+    path: "my-child-journey",
+    element: <Journey />,
+  },
+  {
+    id: 29,
+    name: "Why Fouady",
+    path: "why-fouady",
+    element: <WhyFouady />,
+  },
+];

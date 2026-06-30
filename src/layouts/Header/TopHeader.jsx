@@ -1,90 +1,101 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { House, Pin, Settings, Share2, UserRoundCog, Bell } from 'lucide-react'
-import { useReport } from '../../context/ReportContext'
-import { Link, useLocation, useNavigate } from 'react-router'
+import { Bell, House, Settings, Share2, UserRoundCog } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router";
+import { useReport } from "../../context/ReportContext";
 
 export default function TopHeader() {
   const { selectedRecord } = useReport();
   const navigate = useNavigate();
-  const [showNotifications, setShowNotifications] = useState(false);
   const location = useLocation();
-  const dropdownRef = useRef(null);
 
-  const isReportPage = location.pathname.includes('/report');
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowNotifications(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const notifications = isReportPage
-    ? [
-      { id: 1, text: "تم تحديث بيانات التقرير الحالي", time: "منذ دقيقتين" },
-      { id: 2, text: "طلب طباعة جديد للتقرير", time: "منذ ساعة" },
-    ]
-    : [
-      { id: 1, text: "تنبيه عام: النظام محدث", time: "منذ يوم" },
-    ];
+  const isActiveRoute = (path) => {
+    if (path === "/") return location.pathname === "/";
+    return (
+      location.pathname === path || location.pathname.startsWith(`${path}/`)
+    );
+  };
 
   const handleBellClick = () => {
     if (selectedRecord) {
       navigate(`/notifications/${selectedRecord.id}`);
     } else {
-      navigate('/notifications');
+      navigate("/notifications");
     }
   };
 
+  const navItemClass = (isActive) =>
+    `w-10 h-10 sm:w-11 sm:h-11 rounded-full border flex items-center justify-center transition-all duration-200 ${
+      isActive
+        ? "bg-(--main-color) border-(--main-color) shadow-[0_6px_18px_rgba(212,154,62,0.22)]"
+        : "bg-transparent border-transparent hover:bg-white/5 hover:border-(--main-color)/20"
+    }`;
+
+  const iconClass = (isActive) =>
+    `${isActive ? "text-black" : "text-(--main-color)"} w-[22px] h-[22px] sm:w-[24px] sm:h-[24px] transition-colors duration-200`;
+
+  const isHomeActive = isActiveRoute("/");
+  const isSettingsActive = isActiveRoute("/settings");
+  const isProfileActive = isActiveRoute("/profile");
+  const isShareActive = isActiveRoute("/share");
+  const isNotificationsActive =
+    isActiveRoute("/notifications") ||
+    location.pathname.startsWith("/notifications/");
+
   return (
-    <div
-      style={{
-        direction: "rtl",
-      }}
-      className='grid bg-(--dark_gray-4) z-60 fixed left-0 right-0 bottom-0 grid-cols-6 gap-2 items-center justify-center py-4 border-t-2 border-(--main-color)'>
-      <Link to="/">
-        <House className='text-(--main-color) text-center mx-auto w-[26px] h-[26px]' />
-      </Link>
-      <Link to="/settings">
-        <Settings className='text-(--main-color) text-center mx-auto w-[26px] h-[26px]' />
-      </Link>
-      <Link to="/profile">
-        <UserRoundCog className='text-(--main-color) text-center mx-auto w-[26px] h-[26px]' />
-      </Link>
-      <Link to="/share">
-        <Share2 className='text-(--main-color) text-center mx-auto w-[26px] h-[26px]' />
-      </Link>
+    <div className="lg:hidden fixed bottom-0 inset-x-0 z-60 bg-(--dark_gray-4) border-t-2 border-(--main-color)">
+      <div className="w-full max-w-full sm:max-w-[640px] mx-auto">
+        <div className="grid grid-cols-5 gap-2 items-center justify-center py-4 px-2 sm:px-6">
+          <Link
+            to="/"
+            className="flex justify-center"
+            aria-current={isHomeActive ? "page" : undefined}
+          >
+            <span className={navItemClass(isHomeActive)}>
+              <House className={iconClass(isHomeActive)} />
+            </span>
+          </Link>
 
-      <Link to="/pin">
-        <Pin className='text-(--main-color) text-center mx-auto w-[26px] h-[26px]' />
-      </Link>
+          <Link
+            to="/settings"
+            className="flex justify-center"
+            aria-current={isSettingsActive ? "page" : undefined}
+          >
+            <span className={navItemClass(isSettingsActive)}>
+              <Settings className={iconClass(isSettingsActive)} />
+            </span>
+          </Link>
 
-      <div className="relative" ref={dropdownRef}>
-        <Bell
-          onClick={handleBellClick}
-          className='text-(--main-color) text-center mx-auto w-[26px] h-[26px] cursor-pointer hover:scale-110 transition-transform'
-        />
-        {showNotifications && (
-          <div className="absolute top-[45px] right-0 w-[250px] bg-[#171717] border-2 border-(--main-color) rounded-[8px] shadow-2xl z-70 animate-in slide-in-from-top-2 duration-200" style={{ direction: 'rtl' }}>
-            <div className="p-3 border-b border-(--main-color)/20">
-              <p className="text-white font-bold text-sm">
-                {isReportPage ? "إشعارات التقارير" : "الإشعارات العامة"}
-              </p>
-            </div>
-            <div className="max-h-[300px] overflow-y-auto">
-              {notifications.map(n => (
-                <div key={n.id} className="p-3 hover:bg-(--main-color)/10 border-b border-(--main-color)/10 last:border-0 transition-colors">
-                  <p className="text-[#eee] text-xs leading-relaxed">{n.text}</p>
-                  <p className="text-(--main-color) text-[10px] mt-1">{n.time}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+          <Link
+            to="/profile"
+            className="flex justify-center"
+            aria-current={isProfileActive ? "page" : undefined}
+          >
+            <span className={navItemClass(isProfileActive)}>
+              <UserRoundCog className={iconClass(isProfileActive)} />
+            </span>
+          </Link>
+
+          <Link
+            to="/share"
+            className="flex justify-center"
+            aria-current={isShareActive ? "page" : undefined}
+          >
+            <span className={navItemClass(isShareActive)}>
+              <Share2 className={iconClass(isShareActive)} />
+            </span>
+          </Link>
+
+          <button
+            type="button"
+            onClick={handleBellClick}
+            className="flex justify-center"
+            aria-current={isNotificationsActive ? "page" : undefined}
+          >
+            <span className={navItemClass(isNotificationsActive)}>
+              <Bell className={iconClass(isNotificationsActive)} />
+            </span>
+          </button>
+        </div>
       </div>
     </div>
-  )
+  );
 }

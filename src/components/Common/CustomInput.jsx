@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function CustomInput({
   type = "text",
   istextarea,
@@ -11,62 +9,93 @@ export default function CustomInput({
   row,
   value,
   error,
+  register,
+  autoComplete,
+  hasEndIcon = false,
 }) {
-  // Common classes for consistency
-  const commonClasses = `block bg-[#171717] border border-[#545454] w-full text-sm text-white focus:border-(--main-color) p-[8px_10px] outline-none placeholder:text-white pr-2 rounded-[5px] transition-all ${className}`;
+  const commonClasses = `block bg-[#0f0f0f] border border-[#2a2a2a] w-full text-[13px] text-white focus:border-(--main-color) py-[8px] ps-3 ${
+    hasEndIcon ? "pe-9" : "pe-3"
+  } outline-none placeholder:text-white/35 rounded-[10px] transition-colors ${
+    error ? "!border-[#671C33]" : ""
+  } ${className}`;
 
   if (istextarea) {
+    const textareaProps = register
+      ? { ...register }
+      : { value: value ?? "", onChange, name };
+
     return (
       <div className="w-full flex flex-col gap-1">
         <textarea
-          className={commonClasses}
+          {...textareaProps}
+          className={`${commonClasses} resize-none`}
           style={style}
-          rows={row || 7}
-          onChange={onChange}
+          rows={row || 5}
           placeholder={placeholder}
-          value={value}
-        ></textarea>
-        {error && <p className="text-red-500 text-[10px] text-right">{error.message || error}</p>}
+        />
+        {error && <ErrorText error={error} />}
       </div>
     );
   }
 
-  // Handle File Type specifically to show placeholder
   if (type === "file") {
     return (
       <div className="w-full flex flex-col gap-1">
         <label
-          className={`${commonClasses} h-[38.7px] flex items-center justify-end cursor-pointer`}
+          className={`${commonClasses} h-[38px] flex items-center cursor-pointer`}
           style={style}
         >
-          <span className="text-white text-sm">
-            {value ? (typeof value === "string" ? value : value.name) : placeholder}
+          <span className="text-white text-[13px] truncate">
+            {value
+              ? typeof value === "string"
+                ? value
+                : value.name
+              : placeholder}
           </span>
           <input
             type="file"
-            className="hidden" // Hide the default browser button
+            className="hidden"
             name={name}
             onChange={onChange}
+            {...(register || {})}
           />
         </label>
-        {error && <p className="text-red-500 text-[10px] text-right">{error.message || error}</p>}
+        {error && <ErrorText error={error} />}
       </div>
     );
   }
 
-  // Default Input (text, number, etc.)
+  const inputProps = register
+    ? { ...register }
+    : { value: value ?? "", onChange, name };
+
   return (
     <div className="w-full flex flex-col gap-1">
       <input
-        className={`${commonClasses} text-right text-white placeholder:text-white h-[38.7px] ${error ? 'border-red-500' : ''}`}
-        style={style}
-        value={value || ""}
-        name={name}
+        {...inputProps}
         type={type}
-        onChange={onChange}
+        autoComplete={autoComplete}
         placeholder={placeholder}
+        style={style}
+        className={`${commonClasses} h-[40px]`}
       />
-      {error && <p className="text-red-500 text-[10px] text-right">{error.message || error}</p>}
+      {error && <ErrorText error={error} />}
     </div>
+  );
+}
+
+/* ====== Error Text (نبيتي #671C33) ====== */
+function ErrorText({ error }) {
+  return (
+    <p
+      className="text-[11px] flex items-center gap-1.5 mt-0.5"
+      style={{ color: "#a8334c" }}
+    >
+      <span
+        className="inline-block w-1.5 h-1.5 rounded-full"
+        style={{ backgroundColor: "#671C33" }}
+      />
+      {error.message || error}
+    </p>
   );
 }

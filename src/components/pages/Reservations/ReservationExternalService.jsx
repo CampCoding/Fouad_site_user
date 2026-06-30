@@ -1,52 +1,83 @@
-import React from 'react'
-import CustomSelect from '../../Common/CustomSelect';
+import { useTranslation } from "react-i18next";
+import CustomSelect from "../../Common/CustomSelect";
 
-// ✨ خدمة واحدة دلوقتي
-const serviceOptions = [
-  { value: 'pediatric_checkup', label: 'كشف أطفال' },
-];
+export default function ReservationExternalService({
+  goToNextStep,
+  details,
+  setDetails,
+}) {
+  const { t } = useTranslation();
 
-export default function ReservationExternalService({ goToNextStep, details, setDetails }) {
+  const serviceOptions = [
+    {
+      value: "pediatric_checkup",
+      label: t("reservations.chooseService.pediatricCheckup"),
+    },
+  ];
 
-  const isContinueEnabled = details.service && details.type && details.governorate && details.city && details.hospital;
+  const typeOptions = [
+    { value: "first", label: t("reservations.chooseService.firstTime") },
+    { value: "followup", label: t("reservations.chooseService.followup") },
+  ];
+
+  const governorateOptions = [
+    { value: "cairo", label: t("reservations.externalService.cairo") },
+  ];
+
+  const cityOptions = [
+    { value: "nasr_city", label: t("reservations.externalService.nasrCity") },
+  ];
+
+  const hospitalOptions = [
+    {
+      value: "hosp1",
+      label: t("reservations.externalService.salamHospital"),
+    },
+  ];
+
+  const isContinueEnabled =
+    details.service &&
+    details.type &&
+    details.governorate &&
+    details.city &&
+    details.hospital;
 
   return (
     <div className="flex flex-col gap-3 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="border h-[38.4px] mb-4 flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px]">
-        <p className='text-white text-center font-bold'>إملاء بيانات الخدمة</p>
+      <div className="border h-[var(--main-height)] mb-4 flex justify-center items-center border-(--main-color) bg-[#171717] rounded-[4px]">
+        <p className="text-white text-center font-bold text-[13px] lg:text-[15px]">
+          {t("reservations.externalService.fillServiceData")}
+        </p>
       </div>
 
-      <div className='flex flex-col gap-3'>
+      <div className="flex flex-col gap-3">
         <CustomSelect
-          placeholder={"الخدمة"}
+          placeholder={t("reservations.chooseService.service")}
           options={serviceOptions}
           value={details.service}
           onChange={(val) => setDetails({ ...details, service: val })}
         />
         <CustomSelect
-          placeholder={"أول مرة / متابعة"}
-          options={[
-            { value: 'first', label: 'أول مرة' },
-            { value: 'followup', label: 'متابعة' }
-          ]}
+          placeholder={t("reservations.chooseService.firstOrFollowup")}
+          options={typeOptions}
           value={details.type}
           onChange={(val) => setDetails({ ...details, type: val })}
         />
         <CustomSelect
-          placeholder={"المحافظة"}
-          options={[{ value: 'cairo', label: 'القاهرة' }]}
+          placeholder={t("reservations.externalService.governorate")}
+          options={governorateOptions}
           value={details.governorate}
           onChange={(val) => setDetails({ ...details, governorate: val })}
         />
         <CustomSelect
-          placeholder={"المدينة"}
-          options={[{ value: 'nasr_city', label: 'مدينة نصر' }]}
+          placeholder={t("reservations.externalService.city")}
+          options={cityOptions}
           value={details.city}
           onChange={(val) => setDetails({ ...details, city: val })}
         />
         <CustomSelect
-          placeholder={"المستشفى / الحضانة"}
-          options={[{ value: 'hosp1', label: 'مستشفى السلام' }]}
+          placeholder={t("reservations.externalService.hospital")}
+          options={hospitalOptions}
           value={details.hospital}
           onChange={(val) => setDetails({ ...details, hospital: val })}
         />
@@ -54,10 +85,10 @@ export default function ReservationExternalService({ goToNextStep, details, setD
 
       <button
         onClick={goToNextStep}
-        className={`auth_btn mt-3 ms-auto! ${!isContinueEnabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`auth_btn mt-3 ms-auto! ${!isContinueEnabled ? "opacity-50 cursor-not-allowed" : ""}`}
         disabled={!isContinueEnabled}
       >
-        الاستمرار
+        {t("reservations.continue")}
       </button>
     </div>
   );

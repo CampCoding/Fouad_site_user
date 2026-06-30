@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Rakkas&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap");
 
 @import "tailwindcss";
 
@@ -10,9 +10,11 @@
   --foreground: #171717;
   --main-bg-color: #d49a3e80;
   --font-cairo: Cairo, sans-serif;
-  --font-sans: Open Sans, sans-serif;
+  --font-sans: "Open Sans", sans-serif;
   --light-gray: #eee;
   --main-color: #d49a3e;
+  --error-color: #671c33;
+  --error-text: #a8334c;
   --bg-black: #000;
   --bg-light-black: #171717;
   --dark-gray: #232323;
@@ -38,16 +40,25 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* ===== Body بدون direction ثابت ===== */
 body {
-  direction: rtl;
   background: var(--dark_gray-4);
   color: var(--foreground);
-  font-family: "Cairo", sans-serif;
+}
+
+/* الفونت يتغير حسب اللغة تلقائياً */
+html[lang="ar"] body {
+  font-family: "Cairo", "Noto Sans Arabic", sans-serif;
+}
+
+html[lang="en"] body {
+  font-family: "Open Sans", sans-serif;
 }
 
 button {
   cursor: pointer !important;
 }
+
 .customeHeaderClass {
   display: flex;
   justify-content: center;
@@ -373,7 +384,6 @@ button {
   }
 }
 
-
 .card {
-  @apply mx-auto cursor-pointer w-[100px] h-[100px] bg-[linear-gradient(90deg,rgba(36,36,36,0.63),rgba(64,64,64,0.63))] rounded-lg flex flex-col gap-[10px] items-center justify-center;
+  @apply mx-auto cursor-pointer w-[130px] h-[130px] bg-[linear-gradient(90deg,rgba(36,36,36,0.63),rgba(64,64,64,0.63))] rounded-lg flex flex-col gap-[10px] items-center justify-center;
 }

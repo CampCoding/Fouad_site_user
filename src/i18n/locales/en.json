@@ -1,0 +1,977 @@
+{
+  "common": {
+    "appName": "Fouady",
+    "back": "Back"
+  },
+  "mainLogo": {
+    "title": "Fouady Centers",
+    "subtitle": "For Pediatric Cardiology"
+  },
+  "nav": {
+    "home": "Home",
+    "settings": "Settings",
+    "profile": "Profile",
+    "share": "Share",
+    "pin": "Install",
+    "notifications": "Notifications",
+    "reportsNotifications": "Reports Notifications",
+    "generalNotifications": "General Notifications"
+  },
+  "home": {
+    "bookService": "Book a Service",
+    "medicalReports": "Medical Reports",
+    "onlineConsultations": "Online Consultations",
+    "beforeYourVisit": "Before Your Visit",
+    "myChildJourney": "My Child's Journey",
+    "educationGuidance": "Education & Guidance",
+    "ourBranches": "Our Branches",
+    "ourServices": "Our Services",
+    "ourDoctorsTeam": "Our Team",
+    "whyFouady": "Why Fouady?",
+    "contactUs": "Contact Us",
+    "shareYourFeedback": "Share Your Feedback",
+    "desc": {
+      "bookService": "Book your service easily",
+      "medicalReports": "View reports and results",
+      "onlineConsultations": "Request a remote consultation",
+      "beforeYourVisit": "Know what to do before visiting",
+      "myChildJourney": "Follow your child's medical journey",
+      "educationGuidance": "Educational content for families",
+      "ourBranches": "Explore our branch locations",
+      "ourServices": "Discover our center services",
+      "ourDoctorsTeam": "Meet our doctors and team",
+      "whyFouady": "See what makes Fouady special",
+      "contactUs": "Reach us easily",
+      "shareYourFeedback": "Rate your experience and share feedback"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "saveCard": "Save Card"
+  },
+  "profile": {
+    "title": "Profile",
+    "mainMenu": "Main Menu",
+    "menu": {
+      "followers": "Follow-ups",
+      "appointments": "Appointments",
+      "patients": "My Patients",
+      "offers": "My Offers",
+      "balance": "Balance",
+      "messages": "Messages",
+      "data": "My Data",
+      "consultations": "My Consultations",
+      "clinics": "My Clinics",
+      "hospitals": "My Hospitals"
+    },
+    "desc": {
+      "followers": "Your upcoming medical follow-ups",
+      "appointments": "All your current appointments",
+      "offers": "Available offers and discounts",
+      "balance": "Manage your account balance",
+      "patients": "Manage your patients list",
+      "messages": "Contact center administration",
+      "data": "Your personal information",
+      "consultations": "Your online medical consultations",
+      "clinics": "Your private clinics and working hours",
+      "hospitals": "Hospitals where you practice"
+    },
+    "data": {
+      "name": "Name",
+      "phone": "Phone Number",
+      "job": "Job",
+      "workplaces": "Workplaces",
+      "places": "place(s)",
+      "addWorkplace": "Add Workplace",
+      "addAnother": "Add Another Workplace",
+      "saveChanges": "Save Changes",
+      "workplaceName": "Workplace Name",
+      "workplaceCode": "Workplace Code",
+      "code": "Code"
+    },
+    "appointments": {
+      "upcoming": "Upcoming Appointments",
+      "count": "appointments",
+      "patient": "Patient Name",
+      "service": "Service",
+      "branch": "Branch",
+      "date": "Date",
+      "time": "Time"
+    },
+    "followers": {
+      "upcoming": "Upcoming Follow-ups",
+      "count": "follow-ups",
+      "doctor": "Doctor",
+      "book": "Book Follow-up"
+    },
+    "offers": {
+      "available": "Available Offers",
+      "count": "offers",
+      "discount": "Discount",
+      "validUntil": "Valid until",
+      "useNow": "Use Offer Now"
+    },
+    "balance": {
+      "current": "Current Balance",
+      "currency": "EGP",
+      "useInfo": "How to use balance",
+      "useInfoLine1": "You can use your balance to book any center service",
+      "useInfoLine2": "If balance is less than service price, you must recharge the difference",
+      "use": "Use Balance",
+      "recharge": "Recharge Balance",
+      "history": "Transaction History",
+      "lastTransactions": "Last 5 transactions",
+      "addCredit": "Add Credit",
+      "useCredit": "Use Credit",
+      "addedOn": "Added on",
+      "expiresOn": "Expires"
+    },
+    "messages": {
+      "newMessage": "Start New Message",
+      "newMessageDesc": "Contact center administration",
+      "previous": "Previous Messages",
+      "count": "messages",
+      "noMessages": "No messages yet",
+      "incoming": "Incoming",
+      "outgoing": "Outgoing",
+      "subject": "Message Subject",
+      "messageBody": "Write your message here...",
+      "send": "Send",
+      "newMessageTitle": "New Message"
+    },
+    "modal": {
+      "add": "Add",
+      "cancel": "Cancel"
+    }
+  },
+  "consultations": {
+    "title": "Consultations",
+    "steps": {
+      "booking": "Booking",
+      "payment": "Payment",
+      "confirm": "Confirm"
+    },
+    "doctor": "Referred Doctor",
+    "type": "Consultation Type",
+    "types": {
+      "phone": "Phone Consultation",
+      "video": "Video Consultation",
+      "chat": "Text Consultation (Chat)",
+      "unavailable": "Not available"
+    },
+    "specialty": "Cardiology Consultant",
+    "doctorName": "Dr. Ahmed Shabana",
+    "currency": "EGP",
+    "selectDayAndTime": "Select Day & Time",
+    "selectDayForChat": "Select Preferred Reply Day",
+    "days": {
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    },
+    "periods": {
+      "am": "AM",
+      "pm": "PM"
+    },
+    "selected": "Selected",
+    "chatDetails": {
+      "title": "Consultation Details",
+      "info": "Please describe your condition accurately and clearly so the doctor can provide the best consultation.",
+      "placeholder": "Write your consultation details here... (symptoms, history, medications, questions you want to ask...)",
+      "minChars": "Minimum 10 characters ({{count}} remaining)",
+      "valid": "✓ Content is valid for submission",
+      "charsCount": "{{count}} characters"
+    },
+    "goToPayment": "Next - Payment Details",
+    "noteTitle": "Important Note",
+    "phoneNote": "You will be contacted at the selected time. Please make sure your phone is available at the specified time.",
+    "chatNote": "The doctor will reply on chat through the app at the specified time. Make sure to enable notifications.",
+    "paymentTitle": "Fill Payment Details",
+    "summary": {
+      "doctor": "Doctor:",
+      "type": "Consultation Type:",
+      "appointment": "Appointment:",
+      "details": "Consultation Details:",
+      "day": "Day:",
+      "time": "Time:",
+      "paymentMethod": "Payment Method:",
+      "price": "Price:",
+      "discount": "Discount:"
+    },
+    "payment": {
+      "selectMethod": "Select Payment Method",
+      "servicePrice": "Service Price",
+      "pricePlaceholder": "Price",
+      "hasCoupon": "Have a coupon code?",
+      "balance": "EGP",
+      "currentBalance": "Your Current Balance",
+      "insufficient": "Sorry... Your balance is insufficient to complete the transaction",
+      "transferAction": "Click here to transfer booking amount",
+      "transferBtn": "Transfer",
+      "uploadAction": "Click here to upload transfer receipt",
+      "uploadBtn": "Upload",
+      "uploadDocs": "Please upload these documents clearly",
+      "deliveryNote": "These documents are delivered in the same order through our branches on examination day",
+      "couponPlaceholder": "Coupon Code",
+      "confirmBtn": "Confirm",
+      "discountApplied": "20% discount has been applied",
+      "back": "Back",
+      "continue": "Continue",
+      "options": {
+        "balance": "Pay using your program balance",
+        "cash": "Pay cash at the branch on examination day",
+        "cards": "Pay by electronic card",
+        "instapay": "Pay via InstaPay",
+        "vodafone": "Pay via Vodafone Cash",
+        "insurance": "Health insurance coverage",
+        "doctors": "Doctors Syndicate contract",
+        "engineers": "Engineers Syndicate contract"
+      },
+      "insuranceDocs": {
+        "doc1": "Original insurance letter to center, stamped and valid",
+        "doc2": "Image of first page of health certificate (Carnet)",
+        "doc3": "Image of child's birth certificate",
+        "doc4": "Image of father's or mother's ID"
+      },
+      "syndicateDocs": {
+        "doc1": "Original syndicate letter to center, stamped and valid",
+        "doc2": "Image of child's birth certificate",
+        "doc3": "Image of father's or mother's ID"
+      }
+    },
+    "confirm": {
+      "title": "Confirm Booking",
+      "back": "Back",
+      "confirm": "Confirm"
+    },
+    "modals": {
+      "uploadTitle": "Upload Transfer Receipt",
+      "uploadPlaceholder": "Click here to select receipt file",
+      "uploadFormats": "PDF, JPG, PNG (Max 5MB)",
+      "cancel": "Cancel",
+      "uploadNow": "Upload Now",
+      "transferTitle": "Transfer Details",
+      "accountNumber": "Mobile / Account Number",
+      "recipientName": "Recipient Name",
+      "companyName": "Fouady Systems Co.",
+      "transferNote": "Please verify the account number before transfer, and upload receipt image after completion to ensure quick booking activation.",
+      "understood": "Got it, thanks"
+    },
+    "errors": {
+      "selectSlot": "Please select a time slot",
+      "writeDetails": "Please write your consultation details",
+      "minDetails": "Please write more details (at least 10 characters)",
+      "selectPayment": "Please select a payment method",
+      "insufficientBalance": "Your balance is insufficient to complete the transaction"
+    },
+    "success": {
+      "chatBooked": "Text consultation booked successfully! The doctor will reply soon",
+      "booked": "Consultation booked successfully! You will be contacted at the specified time"
+    }
+  },
+  "servicesPage": {
+    "title": "Our Services",
+    "subtitle": "Browse Fouady services through interactive horizontal cards, then open any service to view details and book directly.",
+    "browseHintTitle": "Swipe left and right to explore services",
+    "browseHintText": "Each section contains a group of services. Tap any card to view full details and continue booking easily.",
+    "servicesCount": "{{count}} services",
+    "viewDetails": "View details",
+    "bookNow": "Book now",
+    "browseMore": "Browse more services",
+    "backToServices": "Back to services",
+    "detailHint": "You can book this service directly from the reservations page.",
+    "dragToExplore": "Scroll horizontally for more"
+  },
+  "branchesPage": {
+    "title": "Branches",
+    "categoriesTitle": "Branches & Units",
+    "howToReachBranch": "How to reach {{name}} branch",
+    "swipeHintTitle": "Swipe left and right to explore branches",
+    "swipeHintText": "Each section contains its related branches or units. Tap any card to view photos, details, and location information easily.",
+    "locationsCount": "{{count}} locations",
+    "viewBranch": "View branch",
+    "howToReach": "How to reach",
+    "address": "Address",
+    "branchGallery": "Branch gallery",
+    "branchLocation": "Branch location",
+    "locationHint": "Tap the button above to open the location directly in Google Maps and get directions.",
+    "morePhotos": "You can browse through branch photos when available.",
+    "browseMoreBranches": "Browse more branches",
+    "backToBranch": "Back to branch",
+    "horizontalHint": "Scroll horizontally for more",
+    "openInMaps": "Open in Google Maps",
+    "openInMapsHint": "Get directions via the Maps app"
+  },
+  "educationPage": {
+    "title": "Education",
+    "chooseType": "Choose education type",
+    "browseHintTitle": "Browse educational content",
+    "browseHintText": "Tap any section to explore its available articles and videos.",
+    "articles": "Articles",
+    "videosLabel": "Videos",
+    "topicsLabel": "topics",
+    "readMore": "Read more",
+    "explore": "Explore",
+    "videoPlayer": "Video Player",
+    "comingSoon": "Article content will be added soon...",
+    "backToTopics": "Back to topics",
+    "backToCategory": "Back to section"
+  },
+  "instructionsPage": {
+    "title": "Instructions",
+    "chooseType": "Choose instruction type",
+    "browseHintTitle": "Browse instructions easily",
+    "browseHintText": "Tap any card to view its instructions clearly and in an organized way before your visit to the center.",
+    "instructionsCount": "{{count}} instructions",
+    "viewInstructions": "View instructions",
+    "backToInstructions": "Back to instructions",
+    "instructionsLabel": "Important instructions",
+    "bottomNote": "Please follow the instructions relevant to your condition or required examination. If you have any questions, you can contact the center before your visit."
+  },
+  "sharePage": {
+    "title": "Share",
+    "shareHeader": "Sharing Options",
+    "installHeader": "Install App",
+    "shareTab": "Share",
+    "installTab": "Install",
+    "browseHintTitle": "Share the app easily",
+    "browseHintText": "Choose the best way to send or copy the app link, and you can also install the app on your device from the install tab.",
+    "inviteMessage": "Join Fouady app using the following link: {{link}}",
+    "telegramShareText": "Join Fouady app",
+    "linkLabel": "Invite link",
+    "whatsappTitle": "Invite via WhatsApp",
+    "whatsappText": "Send the app link directly through WhatsApp.",
+    "telegramTitle": "Invite via Telegram",
+    "telegramText": "Share the app link through Telegram.",
+    "copyTitle": "Copy invite link",
+    "copyText": "Copy the link and share it in any way you prefer.",
+    "shareNow": "Share now",
+    "copyLink": "Copy link",
+    "copied": "Copied",
+    "copySuccess": "Link copied successfully",
+    "copyError": "Failed to copy the link",
+    "installTitle": "Install the app",
+    "installSubtitle": "Add the app to your home screen or desktop for faster access anytime.",
+    "installAvailable": "Installation is available on this device",
+    "alreadyInstalled": "The app is already installed on this device",
+    "installReady": "You can add the app to the home screen or desktop",
+    "installButton": "Install app",
+    "installedButton": "Installed",
+    "installHelpTitle": "Installation steps",
+    "iosHelpTitle": "On iPhone / iPad",
+    "androidHelpTitle": "On Android",
+    "desktopHelpTitle": "On Desktop",
+    "iosStep1": "Open the website in Safari",
+    "iosStep2": "Tap Share",
+    "iosStep3": "Choose Add to Home Screen",
+    "androidStep1": "Open your browser menu",
+    "androidStep2": "Choose Install app or Add to Home screen",
+    "androidStep3": "Confirm installation to add the app",
+    "desktopStep1": "Click the install icon in the address bar",
+    "desktopStep2": "Or open the browser menu and choose Install app",
+    "desktopStep3": "Confirm to add the app to your desktop",
+    "installHint": "If the install button does not appear, use the device-specific steps below.",
+    "installBottomNote": "Installation steps may vary slightly depending on the device or browser, but the final result is quick and easy access to the app."
+  },
+  "teamPage": {
+    "title": "Our Team",
+    "chooseSection": "Choose Section",
+    "browseHintTitle": "Browse Sections",
+    "browseHintText": "Select a section to view team members. You can navigate between members using swipe or arrows",
+    "membersCount": "{{count}} member(s)",
+    "viewMembers": "View Members",
+    "backToSections": "Back to Sections"
+  },
+  "ratingPage": {
+    "title": "Rating",
+    "branchModalTitle": "Rate a Branch Visit",
+    "howWasExperience": "How was your experience with us?",
+    "opinionPlaceholder": "Write your opinion (optional)",
+    "submitRating": "Submit Rating",
+    "storyModalTitle": "Share Your Story",
+    "storySubtitle": "We'd love to hear your success story",
+    "uploadVideo": "Upload Video (optional)",
+    "storyPlaceholder": "Write your story or message...",
+    "shareStory": "Share Story",
+    "errorNoStars": "Please select a star rating",
+    "errorNoStory": "Please write your story or upload a video",
+    "successBranch": "Thank you for your rating! 🌟",
+    "successStory": "Thank you for sharing your story! ❤️",
+    "stars": {
+      "1": "Poor",
+      "2": "Fair",
+      "3": "Good",
+      "4": "Very Good",
+      "5": "Excellent"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "subtitle": "Choose your account type and enter your details",
+      "phone": "Phone Number",
+      "password": "Password",
+      "submitPatient": "Sign in as Patient",
+      "submitDoctor": "Sign in as Doctor",
+      "firstUseNote": "If this is your first time using the app, your default password is the same as your registered phone number. You can change it later for better account security.",
+      "changePassword": "Change Password",
+      "forgotPassword": "Forgot Password",
+      "createAccount": "Create Account",
+      "email": "Email Address",
+      "identifier": "Email or Phone Number",
+      "roles": {
+        "patient": "Patient",
+        "doctor": "Doctor",
+        "patientDesc": "My bookings & reports",
+        "doctorDesc": "My patients & schedule"
+      },
+      "errors": {
+        "phoneMin": "Phone number must be at least 10 digits",
+        "emailInvalid": "Invalid email address",
+        "identifierRequired": "This field is required",
+        "identifierInvalid": "Enter a valid email or phone number",
+        "passwordMin": "Password must be at least 6 characters"
+      }
+    }
+  },
+  "reports": {
+    "title": "Reports",
+    "searchTitle": "Search",
+    "filesTitle": "Files",
+    "searchBtn": "Search",
+    "resetBtn": "Reset",
+    "noResults": "No matching results",
+    "tryChange": "Try changing search criteria",
+    "selectHint": "Select a record from the table",
+    "selectedBadge": "Selected",
+    "scrollHint": "Scroll horizontally for more",
+    "filters": {
+      "childName": "Child Name",
+      "fatherName": "Father Name",
+      "service": "Service",
+      "serviceDate": "Service Date",
+      "governate": "Governorate",
+      "branch": "Branch",
+      "hospitalNursery": "Hospital / Nursery",
+      "phone": "Phone"
+    },
+    "cols": {
+      "child": "Child Name",
+      "father": "Father Name",
+      "service": "Service",
+      "date": "Date"
+    },
+    "actions": {
+      "open": "Open",
+      "print": "Print",
+      "ship": "Ship",
+      "send": "Send",
+      "book": "Book"
+    }
+  },
+  "reportShipping": {
+    "headerTitle": "Request Printed Report Shipping",
+    "fillDataHint": "Please fill in all recipient details",
+    "recipientName": "Recipient Name",
+    "mainPhone": "Main Phone Number",
+    "secondaryPhone": "Secondary Phone Number",
+    "governorate": "Governorate",
+    "city": "City",
+    "addressDetails": "Address Details",
+    "deliveryNote": "The report will be shipped within 24-48 hours via the shipping company",
+    "shippingCost": "Shipping Cost",
+    "paymentMethod": "Payment Method",
+    "confirm": "Confirm",
+    "errors": {
+      "recipientName": "Recipient name must be at least 3 characters",
+      "mainPhone": "Phone number must be at least 10 digits",
+      "governorate": "Please select governorate",
+      "city": "Please select city",
+      "address": "Please enter address details (min 5 characters)",
+      "payment": "Please select payment method"
+    }
+  },
+  "reportSending": {
+    "headerTitle": "Send Report",
+    "reportLink": "Report Link",
+    "send": "Send",
+    "copy": "Copy",
+    "actions": {
+      "whatsapp": "Send report via WhatsApp",
+      "telegram": "Send report via Telegram",
+      "email": "Send report via Email",
+      "copy": "Copy report link"
+    }
+  },
+  "reservations": {
+    "title": "Reservation",
+    "back": "Back",
+    "continue": "Continue",
+    "steps": {
+      "service": "Service",
+      "appointment": "Appointment",
+      "patient": "Patient",
+      "payment": "Payment",
+      "confirmation": "Confirmation"
+    },
+    "chooseService": {
+      "chooseType": "Choose Service Type",
+      "fillServiceData": "Fill Service Details",
+      "internal": "Internal Services",
+      "internalDesc": "(At Our Branches)",
+      "external": "External Services",
+      "externalDesc": "(Hospitals & Nurseries)",
+      "online": "Online Services",
+      "onlineDesc": "(Via Internet)",
+      "service": "Service",
+      "pediatricCheckup": "Pediatric Checkup",
+      "firstTime": "First Time",
+      "followup": "Follow-up",
+      "firstOrFollowup": "First Time / Follow-up",
+      "branch": "Branch",
+      "branchNasrCity": "Nasr City Branch",
+      "branchFifthSettlement": "Fifth Settlement Branch",
+      "branchMaadi": "Maadi Branch"
+    },
+    "externalService": {
+      "fillServiceData": "Fill Service Details",
+      "governorate": "Governorate",
+      "city": "City",
+      "hospital": "Hospital / Nursery",
+      "cairo": "Cairo",
+      "nasrCity": "Nasr City",
+      "salamHospital": "Al-Salam Hospital"
+    },
+    "onlineService": {
+      "fillServiceData": "Fill Service Details",
+      "doctor": "Doctor",
+      "chooseAppointment": "Choose Appointment",
+      "consultationPrice": "Consultation: {{price}} EGP",
+      "setAppointment": "Set Appointment",
+      "reserved": "Reserved",
+      "experience": "Over 15 years of experience in diagnosing and treating pediatric heart diseases.",
+      "consultantPediatric": "Pediatric Cardiology Consultant",
+      "drName": "Dr. Ahmed Shabana"
+    },
+    "patientInfo": {
+      "fillPatientData": "Fill Patient Details",
+      "childName": "Child Name",
+      "fatherName": "Father Name",
+      "motherName": "Mother Name",
+      "phone": "Phone",
+      "age": "Age",
+      "referringDoctor": "Referring Doctor (Optional)"
+    },
+    "payment": {
+      "fillPaymentData": "Fill Payment Details",
+      "chooseMethod": "Choose Payment Method",
+      "servicePrice": "Service Price",
+      "price": "Price",
+      "hasDiscount": "Have a Discount?",
+      "couponCode": "Discount Code",
+      "confirm": "Confirm",
+      "discountApplied": "20% discount applied",
+      "currentBalance": "Your Current Balance",
+      "insufficientBalance": "Sorry.. Your current balance is insufficient",
+      "pressToTransfer": "Press here to transfer the booking amount",
+      "toTransfer": "Transfer",
+      "pressToUpload": "Press here to upload the transfer receipt",
+      "toUpload": "Upload",
+      "uploadReceipt": "Upload Transfer Receipt",
+      "clickToUpload": "Click here to select the receipt file",
+      "fileTypes": "PDF, JPG, PNG (Max 5MB)",
+      "cancel": "Cancel",
+      "uploadNow": "Upload Now",
+      "transferDetails": "Transfer Details",
+      "accountNumber": "Mobile / Account Number",
+      "recipientName": "Recipient Name",
+      "companyName": "Fouady Systems Company",
+      "transferNote": "Please verify the account number before transferring, and upload the receipt after completing the process to ensure fast booking activation.",
+      "understood": "Understood, Thanks",
+      "uploadDocs": "Please upload these documents clearly",
+      "deliverDocs": "These documents should be delivered in the same order\nat our branches on the examination day",
+      "insuranceDoc1": "Original insurance letter to the center, stamped and valid",
+      "insuranceDoc2": "Copy of the first page of the health certificate",
+      "insuranceDoc3": "Copy of child's birth certificate",
+      "insuranceDoc4": "Copy of parent's ID card",
+      "unionDoc1": "Original union letter to the center, stamped and valid",
+      "unionDoc2": "Copy of child's birth certificate",
+      "unionDoc3": "Copy of parent's ID card",
+      "methods": {
+        "balance": "Pay from your app balance",
+        "cash": "Pay cash at the branch on examination day",
+        "cards": "Pay with electronic card",
+        "instapay": "Pay via InstaPay",
+        "vodafone": "Pay via Vodafone Cash",
+        "insurance": "Health insurance coverage",
+        "doctors": "Doctors Syndicate contract",
+        "engineers": "Engineers Syndicate contract"
+      }
+    },
+    "confirmation": {
+      "reviewData": "Review Reservation Details",
+      "confirmed": "Reservation Confirmed",
+      "receivedRequest": "Your request has been received. A confirmation message will be sent shortly",
+      "editReservation": "Edit Reservation",
+      "confirmReservation": "Confirm Reservation",
+      "cancelReservation": "Cancel Reservation",
+      "instructions": "Instructions",
+      "labels": {
+        "serviceType": "Service Type",
+        "service": "Service",
+        "branch": "Branch",
+        "treatingDoctor": "Treating Doctor",
+        "day": "Day",
+        "date": "Date",
+        "time": "Time",
+        "phone": "Phone",
+        "childName": "Child Name",
+        "fatherName": "Father Name",
+        "paymentMethod": "Payment Method",
+        "price": "Price",
+        "governorate": "Governorate",
+        "city": "City",
+        "hospital": "Hospital",
+        "within": "Within"
+      },
+      "values": {
+        "speechTherapy": "Speech Therapy",
+        "checkup": "Checkup",
+        "maadiB": "Maadi Branch",
+        "drName": "Dr. Mohamed Ali",
+        "sunday": "Sunday",
+        "morning": "AM",
+        "instapay": "InstaPay",
+        "gharbia": "Gharbia",
+        "tanta": "Tanta",
+        "darElQemma": "Dar El-Qemma"
+      }
+    }
+  },
+  "reservationAppointment": {
+    "title": "Set Appointment",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "noteText1": "You can choose a specific doctor and set a suitable appointment.",
+    "noteText2": "Or choose",
+    "noteHighlight": "Any Available",
+    "noteText3": "to automatically book the nearest available slot.",
+    "doctor": "Doctor",
+    "selectDoctor": "Select Doctor",
+    "anyDoctor": "Any Available (Nearest Slot)",
+    "doctorName": "Dr. Ahmed Shabana",
+    "nearestAvailable": "Nearest Available Appointment",
+    "autoSelected": "Auto-selected",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "reserved": "Reserved",
+    "summaryTitle": "Appointment Summary:",
+    "summary": {
+      "doctor": "Doctor",
+      "date": "Date",
+      "time": "Time"
+    },
+    "continue": "Continue"
+  },
+  "beforeVisit": {
+    "title": "Before Visit",
+    "subtitle": "Prepare for your child's visit with ease",
+    "intro": "Choose the type of examination to view the appropriate instructions before visiting Fouady Center.",
+    "back": "Back",
+    "backToList": "Back to List",
+    "examsTitle": "Examinations",
+    "extraTitle": "Additional Guidelines",
+    "imagesHint": "Tap any image to view it in full size",
+    "imageCounter": "Image {{current}} of {{total}}",
+    "closeViewer": "Close",
+    "prevImage": "Previous",
+    "nextImage": "Next",
+    "sections": {
+      "echo": {
+        "title": "Echo Examination",
+        "shortDesc": "Ultrasound examination of your child's heart"
+      },
+      "ecg": {
+        "title": "Electrocardiogram (ECG)",
+        "shortDesc": "Recording of the heart's electrical activity"
+      },
+      "holter": {
+        "title": "Holter Examination",
+        "shortDesc": "Continuous heart rate recording for 24-72 hours"
+      },
+      "bring": {
+        "title": "What to Bring?",
+        "shortDesc": "Checklist of everything you need to bring"
+      },
+      "reach": {
+        "title": "Reaching the Branch",
+        "shortDesc": "Addresses and directions"
+      }
+    },
+    "bring": {
+      "intro": "Make sure to bring the following items on the day of the visit to facilitate the examination process:",
+      "items": [
+        "Child's ID card or birth certificate when needed.",
+        "Health insurance card or referral letter, if available.",
+        "Previous medical reports.",
+        "X-ray and laboratory test results.",
+        "List of current medications and dosages.",
+        "Parent's phone number.",
+        "Any questions or observations you want to discuss with the doctor."
+      ]
+    },
+    "reach": {
+      "intro": "Choose the nearest branch to learn the address and directions.",
+      "address": "Address",
+      "workingHours": "Working Hours",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp",
+      "directions": "Directions",
+      "openInMaps": "Open in Google Maps",
+      "needHelp": "I Need Help Reaching",
+      "branches": [
+        {
+          "id": "tanta",
+          "name": "Tanta Branch",
+          "address": "In front of the train station - Ibn El-Hetta Tower - 2nd Floor",
+          "directions": "Next to Tanta main train station, easily accessible from the main road.",
+          "workingHours": "Sat - Thu: 9:00 AM - 9:00 PM",
+          "phone": "01012312000",
+          "whatsapp": "01062426868",
+          "mapLink": "https://maps.google.com/?q=Tanta+Train+Station"
+        },
+        {
+          "id": "benha",
+          "name": "Benha Branch",
+          "address": "In front of Children Specialized Hospital - Building 21, 3rd Floor",
+          "directions": "Directly in front of the Children's Specialized Hospital.",
+          "workingHours": "Sat - Thu: 9:00 AM - 9:00 PM",
+          "phone": "01225756709",
+          "whatsapp": "01225756709",
+          "mapLink": "https://maps.google.com/?q=Benha+Children+Hospital"
+        },
+        {
+          "id": "mahalla",
+          "name": "Mahalla Branch",
+          "address": "El-Bandar Square next to Helwany Misr El-Saeedy - 4th Floor",
+          "directions": "In El-Bandar Square, directly next to Helwany Misr El-Saeedy.",
+          "workingHours": "Sat - Thu: 9:00 AM - 9:00 PM",
+          "phone": "01012312000",
+          "whatsapp": "01062426868",
+          "mapLink": "https://maps.google.com/?q=Mahalla+El+Bandar"
+        }
+      ]
+    }
+  },
+  "journey": {
+    "title": "Journey",
+    "subtitle": "Real stories from our hero children's journeys",
+    "intro": "Watch real journeys of children who overcame the crisis and became heroes. Through sharing, our knowledge and experience have grown.",
+    "back": "Back",
+    "videosTitle": "Videos",
+    "videosCount": "{{count}} videos",
+    "watchNow": "Watch Now",
+    "loading": "Loading...",
+    "fullscreen": "Fullscreen",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "play": "Play",
+    "pause": "Pause",
+    "videoTitle": "Story #{{number}}",
+    "shareNote": "Share Your Story",
+    "shareDesc": "Do you have a success story with Fouady Center? We'd love to hear it."
+  },
+  "whyFouady": {
+    "title": "Why Fouady?",
+    "back": "Back",
+    "hero": {
+      "title": "Why Fouady?",
+      "message": "Specialized pediatric cardiac care that combines medical expertise, diagnostic accuracy, and close family follow-up."
+    },
+    "videoSection": {
+      "title": "Get to Know Us Better",
+      "subtitle": "An introductory video about Fouady Center and our services",
+      "loading": "Loading video..."
+    },
+    "specialty": {
+      "title": "Our Precise Specialty",
+      "desc": "We specialize in diagnosing and following up heart diseases in children and newborns.",
+      "items": [
+        "Echo examination for children and newborns",
+        "Electrocardiogram (ECG)",
+        "Holter monitor",
+        "Follow-up of congenital and acquired cases",
+        "Cardiac services at branches and external units"
+      ]
+    },
+    "team": {
+      "title": "Specialized Medical Team",
+      "desc": "Doctors, technicians, and a reporting team working in pediatric cardiology.",
+      "items": [
+        "Pediatric cardiologists",
+        "Echo doctors and technicians",
+        "Medical reports team",
+        "Medical reviewers",
+        "Reception and family service team"
+      ],
+      "btn": "Meet Our Team"
+    },
+    "reports": {
+      "title": "Precise Report Review",
+      "desc": "Every report goes through organized review stages to ensure accuracy and quality before issuance.",
+      "steps": [
+        "Conducting the examination",
+        "Preparing the draft",
+        "Reviewing images and results",
+        "Approving the report",
+        "Sending the report to family and doctor"
+      ]
+    },
+    "branches": {
+      "title": "Service Close to the Family",
+      "desc": "Multiple branches and external units to facilitate access to specialized service.",
+      "items": [
+        "Fouady Center branches",
+        "Services in hospitals and nurseries when needed",
+        "Easy booking and communication",
+        "Electronic reports delivery"
+      ],
+      "btn": "Find Nearest Branch"
+    },
+    "experience": {
+      "title": "Comfortable Experience for Child and Parent",
+      "desc": "We ensure your visit is clear, calm, and organized from booking to receiving the report.",
+      "items": [
+        "Pre-visit instructions",
+        "Team to assist family during examination",
+        "Clear explanation of service steps",
+        "Follow-up of appointments and reports",
+        "Easy communication channels"
+      ]
+    },
+    "education": {
+      "title": "Awareness & Education",
+      "desc": "We believe knowledge is part of care.",
+      "items": [
+        "Guidance for parents",
+        "Simplified content about heart examinations",
+        "Information before and after the visit",
+        "Fouady Academy and scientific training when needed"
+      ],
+      "btn": "Education & Guidance"
+    },
+    "values": {
+      "title": "Our Values",
+      "subtitle": "What distinguishes us in our journey with your child",
+      "items": [
+        {
+          "title": "Specialized Care",
+          "desc": "Medical expertise in pediatric cardiology"
+        },
+        {
+          "title": "Accurate Reports",
+          "desc": "Multiple reviews before issuance"
+        },
+        {
+          "title": "Clear Communication",
+          "desc": "Simple explanation at every step"
+        },
+        {
+          "title": "Continuous Follow-up",
+          "desc": "We're with you before and after the examination"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Start Your Journey with Fouady",
+      "subtitle": "We are here for your child every step of the way",
+      "bookService": "Book a Service",
+      "contactUs": "Contact Us",
+      "branches": "Our Branches"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "No notifications in this section",
+    "details": "Notification Details",
+    "close": "Close",
+    "openPdf": "Open Report",
+    "downloadPdf": "Download Report",
+    "goToPage": "Go to Page",
+    "viewDetails": "View Details",
+    "noAction": "No action available",
+    "tabs": {
+      "all": "All",
+      "reports": "Reports",
+      "reservations": "Booking",
+      "personal": "Personal",
+      "consultations": "Consultations",
+      "patients": "Patients",
+      "schedule": "My Schedule",
+      "messages": "Messages"
+    },
+    "items": {
+      "reportEcg": "ECG report is now available",
+      "reservationEcho": "Echo examination appointment confirmed",
+      "personalUpdate": "Your personal data has been updated",
+      "reportHolter": "Holter report ready for review",
+      "consultationReply": "You received a reply on your consultation",
+      "consultationNew": "New consultation request from a patient",
+      "consultationAccepted": "Your consultation has been accepted",
+      "patientAdded": "A new patient has been added to your list",
+      "patientFollowup": "Follow-up appointment for one of your patients tomorrow",
+      "scheduleNew": "A new appointment added to your schedule",
+      "scheduleChanged": "An appointment in your schedule has been changed",
+      "messageFromAdmin": "New message from center administration",
+      "messageReply": "Your message has been replied to"
+    },
+    "descriptions": {
+      "reportEcg": "Your child's ECG report has been uploaded. You can now download, view, or share it with the treating doctor.",
+      "reservationEcho": "Your Echo examination appointment is confirmed. Please visit the branch on time and review the booking details.",
+      "personalUpdate": "Your personal data has been updated successfully. You can review it from My Data page.",
+      "reportHolter": "Your child's Holter examination report is ready for review. Click to download.",
+      "consultationReply": "You received a new reply from the doctor on your consultation. Click to view it in full.",
+      "consultationNew": "You have a new consultation request from a patient. Click to review and reply.",
+      "consultationAccepted": "Your consultation has been accepted by the doctor. Appointment details will be sent to you shortly.",
+      "patientAdded": "A new patient has been added to your patient list. You can review their details now.",
+      "patientFollowup": "Reminder: You have a follow-up with one of your patients tomorrow. Click to view details.",
+      "scheduleNew": "A new appointment has been added to your schedule. Click to view details.",
+      "scheduleChanged": "One of your appointments has been changed. Click to view the update.",
+      "messageFromAdmin": "You received a new message from center administration. Click to read and reply.",
+      "messageReply": "Your message has been replied to by center administration."
+    }
+  },
+  "contactUsPage": {
+    "title": "Contact",
+    "methods": {
+      "telephone": "Telephone",
+      "telegram": "Telegram",
+      "whatsapp": "Whatsapp",
+      "linkedin": "LinkedIn",
+      "facebook": "Facebook",
+      "email": "E-mail",
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "tiktok": "TikTok"
+    },
+    "review": {
+      "openButton": "Rate us on Facebook",
+      "title": "Rate the platform on Facebook",
+      "starsQuestion": "What is your star rating for us?",
+      "placeholder": "Write your feedback or suggestions here...",
+      "submit": "Submit review",
+      "cancel": "Cancel",
+      "success": "Your review has been submitted successfully",
+      "openError": "Unable to open the review page right now",
+      "validation": {
+        "comment": "Please write your feedback clearly (at least 5 characters)"
+      }
+    }
+  }
+}
